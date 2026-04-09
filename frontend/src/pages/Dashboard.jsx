@@ -49,19 +49,22 @@ export default function Dashboard() {
           </button>
 
           {/* Quizzes Card */}
-          <div
-            className="card p-6 text-left border-2 border-dashed border-slate-200 opacity-60 cursor-not-allowed"
-            aria-label="Quizzes — coming soon"
+          <button
+            onClick={() => navigate('/quizzes')}
+            className="card p-6 text-left group hover:shadow-lg hover:border-teal-200 border-2 border-transparent
+                       focus:outline-none focus:ring-4 focus:ring-teal-400 focus:ring-offset-2
+                       transition-all duration-200 active:scale-[0.98] cursor-pointer"
+            aria-label="Go to Quizzes — test your digital safety knowledge"
           >
-            <div className="w-16 h-16 bg-teal-100 rounded-2xl flex items-center justify-center mb-5">
+            <div className="w-16 h-16 bg-teal-100 rounded-2xl flex items-center justify-center mb-5 group-hover:bg-teal-200 transition-colors">
               <BookOpen className="w-9 h-9 text-teal-700" aria-hidden="true" />
             </div>
             <h3 className="text-2xl font-black text-slate-900 mb-2">{t('quizzes')}</h3>
             <p className="text-lg text-slate-600 font-medium leading-snug mb-4">{t('quiz_desc')}</p>
-            <span className="inline-block bg-slate-100 text-slate-500 text-sm font-bold px-4 py-2 rounded-full uppercase tracking-wider">
-              Coming Soon
+            <span className="inline-flex items-center gap-2 text-teal-700 font-bold text-base">
+              {t('start')} <ChevronRight className="w-5 h-5" aria-hidden="true" />
             </span>
-          </div>
+          </button>
         </div>
 
         {/* Tip banner */}

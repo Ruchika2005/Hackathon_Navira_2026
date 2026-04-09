@@ -7,6 +7,10 @@ import Dashboard        from './pages/Dashboard';
 import Simulations      from './pages/Simulations';
 import SimulationPassword from './pages/SimulationPassword';
 import SimulationUPI    from './pages/SimulationUPI';
+import Quizzes          from './pages/Quizzes';
+import QuizPhishing     from './pages/QuizPhishing';
+import QuizSMS          from './pages/QuizSMS';
+import QuizDeepfake     from './pages/QuizDeepfake';
 
 export default function App() {
   return (
@@ -19,6 +23,10 @@ export default function App() {
           <Route path="/simulations"            element={<Simulations />} />
           <Route path="/simulations/password"   element={<SimulationPassword />} />
           <Route path="/simulations/upi"        element={<SimulationUPI />} />
+          <Route path="/quizzes"                element={<Quizzes />} />
+          <Route path="/quizzes/phishing"       element={<QuizPhishing />} />
+          <Route path="/quizzes/sms"            element={<QuizSMS />} />
+          <Route path="/quizzes/deepfake"       element={<QuizDeepfake />} />
           {/* Catch-all → Login */}
           <Route path="*"                       element={<Navigate to="/login" replace />} />
         </Routes>

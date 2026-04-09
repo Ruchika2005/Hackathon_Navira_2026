@@ -56,6 +56,32 @@ const translations = {
     amount: "Amount",
     to: "To",
     phone_wallet: "My Wallet",
+
+    // Quiz Shared
+    quiz_q_of_y: "Question {{current}} of {{total}}",
+    next_q: "Next Question →",
+    see_results: "🏁 See My Results",
+    try_again: "Try Again",
+    back_to_quizzes: "← Back to Quizzes",
+    quiz_complete: "Quiz Complete!",
+    your_answers: "📋 Your Answers",
+    score_msg_perfect: "Perfect! You're an expert!",
+    score_msg_great: "Great job! You caught most scams!",
+    score_msg_good: "Good effort — keep practicing!",
+    score_msg_retry: "Don't worry — review and try again!",
+
+    // Quizzes Selection Page
+    quiz_hero_title: "Test Your Skills!",
+    quiz_hero_desc: "Pick a topic below. Each quiz teaches you how to stay safe online in real situations.",
+    quiz_topic_heading: "Choose a Quiz Topic",
+    quiz_how_it_works_title: "How quizzes work",
+    quiz_how_it_works_desc: "Choose the best answer. After each question you'll see exactly why the answer is right or wrong — so you learn from every attempt!",
+    quiz_cat_phishing_title: "Phishing Emails",
+    quiz_cat_phishing_desc: "Learn to spot fake bank emails, suspicious links & malicious attachments.",
+    quiz_cat_sms_title: "SMS / UPI Spam",
+    quiz_cat_sms_desc: "Detect fraud messages, fake UPI alerts and prize winning scam texts.",
+    quiz_cat_deepfake_title: "Deepfake & Social Media",
+    quiz_cat_deepfake_desc: "Identify manipulated images, deepfake videos and fake social profiles.",
   },
   hindi: {
     navira: "Navira",
@@ -112,6 +138,32 @@ const translations = {
     amount: "राशि",
     to: "को",
     phone_wallet: "मेरा वॉलेट",
+
+    // Quiz Shared
+    quiz_q_of_y: "प्रश्न {{current}} का {{total}}",
+    next_q: "अगला प्रश्न →",
+    see_results: "🏁 मेरा परिणाम देखें",
+    try_again: "फिर से कोशिश करें",
+    back_to_quizzes: "← क्विज़ पर वापस जाएं",
+    quiz_complete: "क्विज़ पूरा हुआ!",
+    your_answers: "📋 आपके उत्तर",
+    score_msg_perfect: "शानदार! आप एक विशेषज्ञ हैं!",
+    score_msg_great: "बहुत अच्छा! आपने अधिकांश घोटालों को पहचाना!",
+    score_msg_good: "अच्छा प्रयास — अभ्यास जारी रखें!",
+    score_msg_retry: "चिंता न करें — समीक्षा करें और पुनः प्रयास करें!",
+
+    // Quizzes Selection Page
+    quiz_hero_title: "अपने कौशल का परीक्षण करें!",
+    quiz_hero_desc: "नीचे एक विषय चुनें। प्रत्येक क्विज़ आपको वास्तविक स्थितियों में सुरक्षित रहने का तरीका सिखाती है।",
+    quiz_topic_heading: "एक प्रश्नोत्तरी विषय चुनें",
+    quiz_how_it_works_title: "क्विज़ कैसे काम करते हैं",
+    quiz_how_it_works_desc: "सबसे अच्छा उत्तर चुनें। प्रत्येक प्रश्न के बाद आप देखेंगे कि उत्तर सही या गलत क्यों है — ताकि आप हर प्रयास से सीखें!",
+    quiz_cat_phishing_title: "फिशिंग ईमेल",
+    quiz_cat_phishing_desc: "नकली बैंक ईमेल, संदिग्ध लिंक और हानिकारक अटैचमेंट को पहचानना सीखें।",
+    quiz_cat_sms_title: "एसएमएस / यूपीआई स्पैम",
+    quiz_cat_sms_desc: "धोखाधड़ी संदेशों, नकली यूपीआई अलर्ट और पुरस्कार जीतने वाले घोटाले संदेशों का पता लगाएं।",
+    quiz_cat_deepfake_title: "डीपफेक और सोशल मीडिया",
+    quiz_cat_deepfake_desc: "हेरफेर की गई छवियों, डीपफेक वीडियो और नकली सोशल प्रोफाइल की पहचान करें।",
   },
   marathi: {
     navira: "Navira",
@@ -168,7 +220,33 @@ const translations = {
     amount: "रक्कम",
     to: "ला",
     phone_wallet: "माझे वॉलेट",
-  }
+
+    // Quiz Shared
+    quiz_q_of_y: "प्रश्न {{current}} पैकी {{total}}",
+    next_q: "पुढील प्रश्न →",
+    see_results: "🏁 माझे निकाल पहा",
+    try_again: "पुन्हा प्रयत्न करा",
+    back_to_quizzes: "← क्विझवर परत जा",
+    quiz_complete: "क्विझ पूर्ण झाली!",
+    your_answers: "📋 तुमची उत्तरे",
+    score_msg_perfect: "उत्कृष्ट! तुम्ही तज्ञ आहात!",
+    score_msg_great: "छान! तुम्ही बहुतेक फसवणुकी ओळखल्यात!",
+    score_msg_good: "चांगले प्रयत्न — सराव करत राहा!",
+    score_msg_retry: "काळजी करू नका — पुन्हा प्रयत्न करा!",
+
+    // Quizzes Selection Page
+    quiz_hero_title: "तुमच्या कौशल्याची चाचणी घ्या!",
+    quiz_hero_desc: "खालीलपैकी एक विषय निवडा. प्रत्येक क्विझ तुम्हाला वास्तविक परिस्थितीत ऑनलाइन सुरक्षित कसे राहायचे ते शिकवते.",
+    quiz_topic_heading: "एक क्विझ विषय निवडा",
+    quiz_how_it_works_title: "क्विझ कशा प्रकारे काम करतात",
+    quiz_how_it_works_desc: "सर्वोत्तम उत्तर निवडा. प्रत्येक प्रश्नानंतर तुम्हाला उत्तर बरोबर किंवा चुकीचे का आहे हे कळेल — जेणेकरून तुम्ही प्रत्येक वेळी काहीतरी नवीन शिकाल!",
+    quiz_cat_phishing_title: "फिशिंग ईमेल",
+    quiz_cat_phishing_desc: "खोटे बँक ईमेल, संशयास्पद लिंक्स आणि घातक फाईल्स ओळखायला शिका.",
+    quiz_cat_sms_title: "एसएमएस / यूपीआई स्पॅम",
+    quiz_cat_sms_desc: "फसव्या मेसेज, खोट्या युपीआय अलर्ट आणि बक्षीस जिंकल्याच्या फसव्या संदेशांचा शोध घ्या.",
+    quiz_cat_deepfake_title: "डीपफेक आणि सोशल मीडिया",
+    quiz_cat_deepfake_desc: "बदललेले फोटो, डीपफेक व्हिडीओ आणि खोट्या सोशल प्रोफाईल्स ओळखा.",
+  },
 };
 
 const LanguageContext = createContext();

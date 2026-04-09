@@ -9,8 +9,9 @@
 
   body {
     font-family: 'Inter', sans-serif;
-    @apply bg-blue-50 text-slate-900 antialiased;
+    @apply bg-emerald-50 text-slate-900 antialiased;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   h1, h2, h3 {
@@ -25,9 +26,9 @@
 @layer components {
   /* Big accessible button */
   .btn-primary {
-    @apply w-full py-5 px-8 bg-blue-700 hover:bg-blue-800 active:bg-blue-900
+    @apply w-full py-5 px-8 bg-emerald-700 hover:bg-emerald-800 active:bg-emerald-900
            text-white text-xl font-bold rounded-2xl
-           focus:outline-none focus:ring-4 focus:ring-blue-400 focus:ring-offset-2
+           focus:outline-none focus:ring-4 focus:ring-emerald-400 focus:ring-offset-2
            transition-all duration-200 shadow-md hover:shadow-lg
            flex items-center justify-center gap-3
            min-h-[56px] cursor-pointer;
@@ -35,8 +36,8 @@
 
   .btn-secondary {
     @apply w-full py-5 px-8 bg-white hover:bg-slate-50 active:bg-slate-100
-           text-blue-800 text-xl font-bold rounded-2xl border-2 border-blue-200
-           focus:outline-none focus:ring-4 focus:ring-blue-400 focus:ring-offset-2
+           text-emerald-800 text-xl font-bold rounded-2xl border-2 border-emerald-200
+           focus:outline-none focus:ring-4 focus:ring-emerald-400 focus:ring-offset-2
            transition-all duration-200 shadow-sm
            flex items-center justify-center gap-3
            min-h-[56px] cursor-pointer;
@@ -55,7 +56,7 @@
   .input-field {
     @apply w-full px-5 py-4 text-lg border-2 border-slate-300
            rounded-xl bg-white
-           focus:outline-none focus:ring-4 focus:ring-blue-300 focus:border-blue-500
+           focus:outline-none focus:ring-4 focus:ring-emerald-300 focus:border-emerald-500
            placeholder:text-slate-400 text-slate-900
            transition-all duration-200
            min-h-[56px];
@@ -85,7 +86,7 @@
 
 @layer utilities {
   .focus-ring {
-    @apply focus:outline-none focus:ring-4 focus:ring-blue-400 focus:ring-offset-2 transition-all;
+    @apply focus:outline-none focus:ring-4 focus:ring-emerald-400 focus:ring-offset-2 transition-all;
   }
 
   /* Animated slide in */

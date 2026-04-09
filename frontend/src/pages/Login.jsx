@@ -39,14 +39,14 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-blue-50 flex flex-col items-center justify-center px-4 py-8">
+    <div className="min-h-screen bg-emerald-50 flex flex-col items-center justify-center px-4 py-8">
 
       {/* App Brand */}
       <div className="text-center mb-8">
-        <div className="inline-flex items-center justify-center w-20 h-20 bg-blue-700 rounded-3xl shadow-lg mb-4">
-          <span className="text-white text-4xl font-black">N</span>
+        <div className="inline-flex items-center justify-center w-20 h-20 bg-emerald-700 rounded-3xl shadow-lg mb-4">
+          <span className="text-white text-4xl font-black">G</span>
         </div>
-        <h1 className="text-4xl font-black text-blue-900 tracking-tight">Navira</h1>
+        <h1 className="text-4xl font-black text-emerald-900 tracking-tight">Guardian Path</h1>
         <p className="text-lg text-slate-600 font-medium mt-1">Your digital learning companion</p>
       </div>
 
@@ -72,7 +72,7 @@ export default function Login() {
           {/* Mobile Number */}
           <div>
             <label htmlFor="mobile" className="input-label">
-              <Phone className="inline w-5 h-5 mr-2 text-blue-700" aria-hidden="true" />
+              <Phone className="inline w-5 h-5 mr-2 text-emerald-700" aria-hidden="true" />
               Mobile Number
             </label>
             <input
@@ -96,7 +96,7 @@ export default function Login() {
           {/* Password */}
           <div>
             <label htmlFor="password" className="input-label">
-              <Lock className="inline w-5 h-5 mr-2 text-blue-700" aria-hidden="true" />
+              <Lock className="inline w-5 h-5 mr-2 text-emerald-700" aria-hidden="true" />
               Password
             </label>
             <div className="relative">
@@ -113,7 +113,7 @@ export default function Login() {
               <button
                 type="button"
                 onClick={() => setShowPass(!showPass)}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-blue-700 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 min-h-[44px] min-w-[44px] flex items-center justify-center"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-emerald-700 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-400 min-h-[44px] min-w-[44px] flex items-center justify-center"
                 aria-label={showPass ? 'Hide password' : 'Show password'}
               >
                 {showPass ? <EyeOff className="w-6 h-6" /> : <Eye className="w-6 h-6" />}

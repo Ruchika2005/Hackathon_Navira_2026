@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-900 font-sans antialiased selection:bg-blue-200;
+  }
+}
+
+/* Custom Elderly-Friendly Utility Classes */
+@layer utilities {
+  .focus-ring {
+    @apply focus:outline-none focus:ring-4 focus:ring-blue-500 focus:border-blue-500 transition-shadow;
+  }
+}

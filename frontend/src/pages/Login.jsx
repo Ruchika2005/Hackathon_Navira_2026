@@ -47,9 +47,11 @@ export default function Login() {
     try {
       const response = await axios.post('/api/auth/login', formState);
       localStorage.setItem('token', response.data.token);
+      if (response.data.language) {
+        localStorage.setItem('language', response.data.language);
+      }
       alert('Logged in successfully!');
-      // In a real app we'd redirect to dashboard here, for now reload or redirect to /
-      navigate('/');
+      navigate('/dashboard');
     } catch (error) {
       setApiError(error.response?.data?.message || 'Invalid Mobile Number or Password. Please try again.');
     } finally {

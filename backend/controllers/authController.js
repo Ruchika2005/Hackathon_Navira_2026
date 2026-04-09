@@ -53,7 +53,8 @@ exports.signup = async (req, res) => {
         // 8. Send response
         res.status(201).json({
             message: "Signup successful",
-            token
+            token,
+            language: user.language
         });
 
     } catch (err) {
@@ -88,7 +89,8 @@ exports.login = async (req, res) => {
         // 4. Send response
         res.json({
             message: "Login successful",
-            token
+            token,
+            language: user.language
         });
 
     } catch (err) {

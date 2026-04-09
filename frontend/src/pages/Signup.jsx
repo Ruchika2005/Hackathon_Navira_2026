@@ -65,8 +65,11 @@ export default function Signup() {
     try {
       const response = await axios.post('/api/auth/signup', formState);
       localStorage.setItem('token', response.data.token);
+      if (response.data.language) {
+        localStorage.setItem('language', response.data.language);
+      }
       alert('Account created successfully!');
-      navigate('/');
+      navigate('/dashboard');
     } catch (error) {
       setApiError(error.response?.data?.message || 'Something went wrong. Please try again.');
     } finally {

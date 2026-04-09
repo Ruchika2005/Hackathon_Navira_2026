@@ -1,122 +1,172 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import InputField from '../components/InputField';
-import { LogIn, ArrowRight } from 'lucide-react';
+import { Phone, Lock, Eye, EyeOff, ArrowRight, HelpCircle, CheckCircle } from 'lucide-react';
 
 export default function Login() {
   const navigate = useNavigate();
-  const [formState, setFormState] = useState({
-    mobileNumber: '',
-    password: ''
-  });
-  
-  const [errors, setErrors] = useState({});
-  const [apiError, setApiError] = useState('');
+  const [mobile, setMobile]       = useState('');
+  const [password, setPassword]   = useState('');
+  const [showPass, setShowPass]   = useState(false);
+  const [errors, setErrors]       = useState({});
+  const [apiError, setApiError]   = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleChange = (e) => {
-    setFormState({ ...formState, [e.target.name]: e.target.value });
-    if (errors[e.target.name]) {
-      setErrors({ ...errors, [e.target.name]: null });
-    }
-  };
-
-  const validateForm = () => {
-    let newErrors = {};
-    
-    if (!formState.mobileNumber.trim()) {
-      newErrors.mobileNumber = "Please enter your mobile number.";
-    }
-    
-    if (!formState.password) {
-      newErrors.password = "Please enter your password.";
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+  const validate = () => {
+    const e = {};
+    if (!mobile.trim())  e.mobile   = 'Please enter your mobile number.';
+    if (!password)       e.password = 'Please enter your password.';
+    setErrors(e);
+    return Object.keys(e).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setApiError('');
-    
-    if (!validateForm()) return;
-    
+    if (!validate()) return;
+
     setIsLoading(true);
     try {
-      const response = await axios.post('/api/auth/login', formState);
-      localStorage.setItem('token', response.data.token);
-      if (response.data.language) {
-        localStorage.setItem('language', response.data.language);
-      }
-      alert('Logged in successfully!');
+      const res = await axios.post('/api/auth/login', { mobileNumber: mobile, password });
+      localStorage.setItem('token', res.data.token);
+      if (res.data.language) localStorage.setItem('language', res.data.language);
       navigate('/dashboard');
-    } catch (error) {
-      setApiError(error.response?.data?.message || 'Invalid Mobile Number or Password. Please try again.');
+    } catch (err) {
+      setApiError(err.response?.data?.message || 'Login failed. Please check your details and try again.');
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="w-full bg-white rounded-3xl shadow-xl border-4 border-slate-200 overflow-hidden">
-      <div className="bg-blue-800 px-8 py-10 flex items-center justify-center gap-4">
-        <LogIn className="text-white w-10 h-10" aria-hidden="true" />
-        <h2 className="text-5xl font-extrabold text-white tracking-widest text-center">Login</h2>
+    <div className="min-h-screen bg-blue-50 flex flex-col items-center justify-center px-4 py-8">
+
+      {/* App Brand */}
+      <div className="text-center mb-8">
+        <div className="inline-flex items-center justify-center w-20 h-20 bg-blue-700 rounded-3xl shadow-lg mb-4">
+          <span className="text-white text-4xl font-black">N</span>
+        </div>
+        <h1 className="text-4xl font-black text-blue-900 tracking-tight">Navira</h1>
+        <p className="text-lg text-slate-600 font-medium mt-1">Your digital learning companion</p>
       </div>
 
-      <form onSubmit={handleSubmit} className="p-8 sm:p-12" noValidate>
+      {/* Login Card */}
+      <div className="card w-full max-w-md p-8 slide-up">
+
+        <h2 className="text-3xl font-black text-slate-900 mb-2">Welcome back! 👋</h2>
+        <p className="text-lg text-slate-600 mb-8">Please enter your details to sign in.</p>
+
+        {/* Error Banner */}
         {apiError && (
-          <div className="mb-8 p-6 bg-red-100 border-l-8 border-red-600 rounded-lg" role="alert">
-            <h3 className="text-2xl font-bold text-red-800 mb-2">Login Failed</h3>
-            <p className="text-red-700 text-xl font-medium">{apiError}</p>
+          <div role="alert" className="flex items-start gap-3 bg-red-50 border-2 border-red-300 rounded-2xl p-4 mb-6">
+            <span className="text-red-600 text-2xl mt-0.5" aria-hidden="true">⚠️</span>
+            <div>
+              <p className="font-bold text-red-800 text-lg">Could not sign in</p>
+              <p className="text-red-700 text-base mt-1">{apiError}</p>
+            </div>
           </div>
         )}
 
-        <div className="mb-8">
-            <InputField
-            label="Mobile Number"
-            type="tel"
-            id="mobileNumber"
-            value={formState.mobileNumber}
-            onChange={handleChange}
-            placeholder="Enter your 10-digit number"
-            error={errors.mobileNumber}
+        <form onSubmit={handleSubmit} noValidate className="space-y-6">
+
+          {/* Mobile Number */}
+          <div>
+            <label htmlFor="mobile" className="input-label">
+              <Phone className="inline w-5 h-5 mr-2 text-blue-700" aria-hidden="true" />
+              Mobile Number
+            </label>
+            <input
+              id="mobile"
+              type="tel"
+              inputMode="numeric"
+              value={mobile}
+              onChange={(e) => { setMobile(e.target.value); setErrors(p => ({...p, mobile: ''})); }}
+              className={`input-field ${errors.mobile ? 'border-red-400 focus:ring-red-300' : ''}`}
+              placeholder="e.g. 98765 43210"
+              aria-describedby={errors.mobile ? 'mobile-error' : undefined}
+              aria-invalid={!!errors.mobile}
             />
-        </div>
+            {errors.mobile && (
+              <p id="mobile-error" className="mt-2 text-red-700 text-base font-semibold flex items-center gap-1">
+                ⚠️ {errors.mobile}
+              </p>
+            )}
+          </div>
 
-        <div className="mb-4">
-            <InputField
-            label="Password"
-            type="password"
-            id="password"
-            value={formState.password}
-            onChange={handleChange}
-            placeholder="Type your secret password"
-            error={errors.password}
-            />
-        </div>
+          {/* Password */}
+          <div>
+            <label htmlFor="password" className="input-label">
+              <Lock className="inline w-5 h-5 mr-2 text-blue-700" aria-hidden="true" />
+              Password
+            </label>
+            <div className="relative">
+              <input
+                id="password"
+                type={showPass ? 'text' : 'password'}
+                value={password}
+                onChange={(e) => { setPassword(e.target.value); setErrors(p => ({...p, password: ''})); }}
+                className={`input-field pr-16 ${errors.password ? 'border-red-400 focus:ring-red-300' : ''}`}
+                placeholder="Your secret password"
+                aria-describedby={errors.password ? 'pass-error' : undefined}
+                aria-invalid={!!errors.password}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPass(!showPass)}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-blue-700 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 min-h-[44px] min-w-[44px] flex items-center justify-center"
+                aria-label={showPass ? 'Hide password' : 'Show password'}
+              >
+                {showPass ? <EyeOff className="w-6 h-6" /> : <Eye className="w-6 h-6" />}
+              </button>
+            </div>
+            {errors.password && (
+              <p id="pass-error" className="mt-2 text-red-700 text-base font-semibold">⚠️ {errors.password}</p>
+            )}
+          </div>
 
-        <button 
-          type="submit" 
-          disabled={isLoading}
-          className={`w-full mt-10 py-5 rounded-2xl flex items-center justify-center gap-3 text-3xl font-bold text-white shadow-xl focus-ring transition-all ${isLoading ? 'bg-blue-400 cursor-not-allowed' : 'bg-green-600 hover:bg-green-700 hover:-translate-y-1'}`}
-        >
-          {isLoading ? 'Please wait...' : 'Login Now'}
-          {!isLoading && <ArrowRight className="w-8 h-8" />}
-        </button>
-
-        <div className="mt-12 text-center pt-8 border-t-4 border-slate-100">
-          <p className="text-2xl text-slate-800 mb-6 font-bold">Don't have an account yet?</p>
-          <Link 
-            to="/signup" 
-            className="inline-block px-10 py-5 bg-blue-50 text-blue-800 font-extrabold text-2xl rounded-2xl hover:bg-blue-100 focus-ring border-4 border-blue-200 transition-colors shadow-sm"
+          {/* Submit */}
+          <button
+            type="submit"
+            disabled={isLoading}
+            className={`btn-primary ${isLoading ? 'opacity-60 cursor-not-allowed' : ''}`}
+            aria-busy={isLoading}
           >
-            Create New Account
-          </Link>
-        </div>
-      </form>
+            {isLoading ? (
+              <>
+                <span className="animate-spin text-xl" aria-hidden="true">⏳</span>
+                Signing you in…
+              </>
+            ) : (
+              <>
+                Sign In
+                <ArrowRight className="w-6 h-6" aria-hidden="true" />
+              </>
+            )}
+          </button>
+        </form>
+
+        {/* Divider */}
+        <div className="my-8 border-t-2 border-slate-100" />
+
+        <p className="text-center text-lg text-slate-600 font-medium mb-4">
+          Don't have an account yet?
+        </p>
+        <Link to="/signup">
+          <button className="btn-secondary">
+            ✨ Create a New Account
+          </button>
+        </Link>
+      </div>
+
+      {/* Help */}
+      <button
+        className="help-fab"
+        aria-label="Get help"
+        onClick={() => alert('📞 Call us: 1800-XXX-XXXX\n\nWe are happy to help you sign in!')}
+      >
+        <HelpCircle className="w-5 h-5" />
+        <span>Help</span>
+      </button>
     </div>
   );
 }

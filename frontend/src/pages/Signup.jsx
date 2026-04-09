@@ -69,7 +69,7 @@ export default function Signup() {
       </div>
       <div>
         <label htmlFor="userName" className="input-label">
-          <User className="inline w-5 h-5 mr-2 text-blue-700" /> Your Full Name
+          <User className="inline w-5 h-5 mr-2 text-emerald-700" /> Your Full Name
         </label>
         <input
           id="userName" type="text"
@@ -91,7 +91,7 @@ export default function Signup() {
         <p className="text-lg text-slate-500 mt-2">Mobile is required. Email is optional.</p>
       </div>
       <div>
-        <label htmlFor="mobile" className="input-label"><Phone className="inline w-5 h-5 mr-2 text-blue-700" /> Mobile Number</label>
+        <label htmlFor="mobile" className="input-label"><Phone className="inline w-5 h-5 mr-2 text-emerald-700" /> Mobile Number</label>
         <input id="mobile" type="tel" inputMode="numeric"
           value={form.mobileNumber}
           onChange={e => setField('mobileNumber', e.target.value)}
@@ -101,7 +101,7 @@ export default function Signup() {
       </div>
       <div>
         <label htmlFor="email" className="input-label">
-          <Mail className="inline w-5 h-5 mr-2 text-blue-700" /> Email Address
+          <Mail className="inline w-5 h-5 mr-2 text-emerald-700" /> Email Address
           <span className="ml-2 text-base text-slate-400 font-normal">(optional)</span>
         </label>
         <input id="email" type="email"
@@ -121,7 +121,7 @@ export default function Signup() {
         <p className="text-lg text-slate-500 mt-2">Minimum 6 characters. Don't share it with anyone!</p>
       </div>
       <div>
-        <label htmlFor="pass" className="input-label"><Lock className="inline w-5 h-5 mr-2 text-blue-700" /> Password</label>
+        <label htmlFor="pass" className="input-label"><Lock className="inline w-5 h-5 mr-2 text-emerald-700" /> Password</label>
         <div className="relative">
           <input id="pass" type={showPass ? 'text' : 'password'}
             value={form.password}
@@ -129,7 +129,7 @@ export default function Signup() {
             className={`input-field pr-16 ${errors.password ? 'border-red-400' : ''}`}
             placeholder="At least 6 characters" />
           <button type="button" onClick={() => setShowPass(s => !s)}
-            className="absolute right-4 top-1/2 -translate-y-1/2 p-2 text-slate-500 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 rounded-lg min-h-[44px] min-w-[44px] flex items-center justify-center"
+            className="absolute right-4 top-1/2 -translate-y-1/2 p-2 text-slate-500 hover:text-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-400 rounded-lg min-h-[44px] min-w-[44px] flex items-center justify-center"
             aria-label={showPass ? 'Hide password' : 'Show password'}>
             {showPass ? <EyeOff className="w-6 h-6" /> : <Eye className="w-6 h-6" />}
           </button>
@@ -137,7 +137,7 @@ export default function Signup() {
         {errors.password && <p className="mt-2 text-red-700 font-semibold">⚠️ {errors.password}</p>}
       </div>
       <div>
-        <label htmlFor="confirmPass" className="input-label"><Lock className="inline w-5 h-5 mr-2 text-blue-700" /> Confirm Password</label>
+        <label htmlFor="confirmPass" className="input-label"><Lock className="inline w-5 h-5 mr-2 text-emerald-700" /> Confirm Password</label>
         <input id="confirmPass" type={showPass ? 'text' : 'password'}
           value={form.confirmPassword}
           onChange={e => setField('confirmPassword', e.target.value)}
@@ -166,11 +166,11 @@ export default function Signup() {
           onClick={() => setField('language', val)}
           className={`w-full flex items-center gap-4 p-5 rounded-2xl border-2 transition-all
             ${form.language === val
-              ? 'border-blue-600 bg-blue-50 text-blue-900'
-              : 'border-slate-200 bg-white text-slate-700 hover:border-blue-300'}
-            focus:outline-none focus:ring-4 focus:ring-blue-400 min-h-[64px]`}
+              ? 'border-emerald-600 bg-emerald-50 text-emerald-900'
+              : 'border-slate-200 bg-white text-slate-700 hover:border-emerald-300'}
+            focus:outline-none focus:ring-4 focus:ring-emerald-400 min-h-[64px]`}
           aria-pressed={form.language === val}>
-          <div className={`w-10 h-10 rounded-full flex items-center justify-center text-xl border-2 ${form.language === val ? 'border-blue-600 bg-blue-600 text-white' : 'border-slate-300 bg-slate-50 text-slate-600'}`}>
+          <div className={`w-10 h-10 rounded-full flex items-center justify-center text-xl border-2 ${form.language === val ? 'border-emerald-600 bg-emerald-600 text-white' : 'border-slate-300 bg-slate-50 text-slate-600'}`}>
             {form.language === val ? '✓' : '○'}
           </div>
           <div className="text-left">
@@ -183,11 +183,11 @@ export default function Signup() {
   ];
 
   return (
-    <div className="min-h-screen bg-blue-50 flex flex-col items-center justify-center px-4 py-10">
+    <div className="min-h-screen bg-emerald-50 flex flex-col items-center justify-center px-4 py-10">
 
       {/* Brand */}
       <div className="text-center mb-6">
-        <h1 className="text-3xl font-black text-blue-900">Create Your Account</h1>
+        <h1 className="text-3xl font-black text-emerald-900">Create Your Account</h1>
         <p className="text-lg text-slate-600 mt-1">It only takes a minute!</p>
       </div>
 
@@ -195,7 +195,7 @@ export default function Signup() {
       <div className="w-full max-w-md mb-6">
         <div className="flex gap-2">
           {STEPS.map((s, i) => (
-            <div key={i} className={`h-2 flex-1 rounded-full transition-all duration-300 ${i <= step ? 'bg-blue-600' : 'bg-slate-200'}`} />
+            <div key={i} className={`h-2 flex-1 rounded-full transition-all duration-300 ${i <= step ? 'bg-emerald-600' : 'bg-slate-200'}`} />
           ))}
         </div>
         <p className="text-sm text-slate-500 font-medium mt-2">Step {step + 1} of {STEPS.length}: <strong>{STEPS[step]}</strong></p>
@@ -243,7 +243,7 @@ export default function Signup() {
         {step === 0 && (
           <p className="text-center text-lg text-slate-600 mt-6 font-medium">
             Already have an account?{' '}
-            <Link to="/login" className="text-blue-700 font-bold underline hover:text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-400 rounded">
+            <Link to="/login" className="text-emerald-700 font-bold underline hover:text-emerald-900 focus:outline-none focus:ring-2 focus:ring-emerald-400 rounded">
               Sign in here
             </Link>
           </p>

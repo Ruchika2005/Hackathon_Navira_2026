@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ShieldCheck, Smartphone, ChevronRight, BookOpen } from 'lucide-react';
+import { ShieldCheck, Smartphone, ChevronRight, BookOpen, MessageSquare } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import Navbar from '../components/Navbar';
 
@@ -10,16 +10,16 @@ export default function Dashboard() {
   const userName  = 'Friend'; // Could be stored in localStorage after login
 
   return (
-    <div className="min-h-screen bg-blue-50 flex flex-col">
+    <div className="min-h-screen bg-emerald-50 flex flex-col">
       <Navbar />
 
       <main className="flex-1 w-full max-w-3xl mx-auto px-4 py-8" id="main-content">
 
         {/* Welcome banner */}
-        <div className="card p-6 sm:p-8 mb-8 bg-blue-700 text-white border-0 shadow-lg">
-          <p className="text-xl font-semibold mb-1 text-blue-200">Hello! 👋</p>
+        <div className="card p-6 sm:p-8 mb-8 bg-emerald-700 text-white border-0 shadow-lg">
+          <p className="text-xl font-semibold mb-1 text-emerald-200">Hello! 👋</p>
           <h1 className="text-4xl font-black leading-tight mb-3">{t('welcome')}</h1>
-          <p className="text-lg text-blue-100 font-medium">
+          <p className="text-lg text-emerald-100 font-medium">
             Choose what you'd like to learn today. Take your time — there's no rush!
           </p>
         </div>
@@ -28,7 +28,7 @@ export default function Dashboard() {
         <h2 className="text-2xl font-black text-slate-800 mb-4 px-1">📚 What would you like to do?</h2>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
 
           {/* Simulations Card */}
           <button
@@ -62,6 +62,24 @@ export default function Dashboard() {
             <h3 className="text-2xl font-black text-slate-900 mb-2">{t('quizzes')}</h3>
             <p className="text-lg text-slate-600 font-medium leading-snug mb-4">{t('quiz_desc')}</p>
             <span className="inline-flex items-center gap-2 text-teal-700 font-bold text-base">
+              {t('start')} <ChevronRight className="w-5 h-5" aria-hidden="true" />
+            </span>
+          </button>
+
+          {/* Scam Simulator Card */}
+          <button
+            onClick={() => navigate('/scam-simulator')}
+            className="card p-6 text-left group hover:shadow-lg hover:border-amber-200 border-2 border-transparent
+                       focus:outline-none focus:ring-4 focus:ring-amber-400 focus:ring-offset-2
+                       transition-all duration-200 active:scale-[0.98]"
+            aria-label="Go to AI Scam Simulator — practice resisting scammers"
+          >
+            <div className="w-16 h-16 bg-amber-100 rounded-2xl flex items-center justify-center mb-5 group-hover:bg-amber-200 transition-colors">
+              <MessageSquare className="w-9 h-9 text-amber-700" aria-hidden="true" />
+            </div>
+            <h3 className="text-2xl font-black text-slate-900 mb-2">{t('scam_sim')}</h3>
+            <p className="text-lg text-slate-600 font-medium leading-snug mb-4">{t('scam_sim_desc')}</p>
+            <span className="inline-flex items-center gap-2 text-amber-700 font-bold text-base">
               {t('start')} <ChevronRight className="w-5 h-5" aria-hidden="true" />
             </span>
           </button>

@@ -15,7 +15,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="w-full bg-blue-800 shadow-lg" role="navigation" aria-label="Main navigation">
+      <nav className="w-full bg-emerald-800 shadow-lg" role="navigation" aria-label="Main navigation">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
 
           {/* Logo */}
@@ -27,7 +27,7 @@ export default function Navbar() {
             <div className="bg-white/20 rounded-xl p-1.5">
               <Zap className="text-white w-5 h-5 fill-white" aria-hidden="true" />
             </div>
-            <span className="text-white text-xl font-extrabold tracking-wide">Navira</span>
+            <span className="text-white text-xl font-extrabold tracking-wide">{t('navira')}</span>
           </Link>
 
           {/* Right side controls */}
@@ -66,7 +66,7 @@ export default function Navbar() {
       <button
         className="help-fab"
         aria-label="Get help"
-        onClick={() => alert('📞 Call us: 1800-XXX-XXXX\n📧 Email: help@navira.in\n\nWe are here to help you!')}
+        onClick={() => alert('📞 Call us: 1800-XXX-XXXX\n📧 Email: help@guardianpath.in\n\nWe are here to help you!')}
       >
         <HelpCircle className="w-5 h-5" aria-hidden="true" />
         <span>Help</span>

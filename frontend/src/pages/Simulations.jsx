@@ -9,7 +9,7 @@ export default function Simulations() {
   const { t } = useLanguage();
 
   return (
-    <div className="min-h-screen bg-blue-50 flex flex-col">
+    <div className="min-h-screen bg-emerald-50 flex flex-col">
       <Navbar />
 
       <main className="flex-1 w-full max-w-3xl mx-auto px-4 py-8">
@@ -17,10 +17,10 @@ export default function Simulations() {
         {/* Back */}
         <button
           onClick={() => navigate('/dashboard')}
-          className="flex items-center gap-2 text-blue-700 font-bold text-lg mb-8 hover:text-blue-900 focus:outline-none focus:ring-4 focus:ring-blue-400 rounded-xl p-1 min-h-[44px]"
+          className="flex items-center gap-2 text-emerald-700 font-bold text-lg mb-8 hover:text-emerald-900 focus:outline-none focus:ring-4 focus:ring-emerald-400 rounded-xl p-1 min-h-[44px]"
           aria-label="Go back to home"
         >
-          <ArrowLeft className="w-6 h-6" aria-hidden="true" /> Back to Home
+          <ArrowLeft className="w-6 h-6" aria-hidden="true" /> {t('back')} to Home
         </button>
 
         <h1 className="text-4xl font-black text-slate-900 mb-2">{t('sim_hero_title')}</h1>

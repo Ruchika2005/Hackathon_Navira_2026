@@ -11,6 +11,7 @@ import Quizzes          from './pages/Quizzes';
 import QuizPhishing     from './pages/QuizPhishing';
 import QuizSMS          from './pages/QuizSMS';
 import QuizDeepfake     from './pages/QuizDeepfake';
+import ScamSimulator    from './pages/ScamSimulator';
 
 export default function App() {
   return (
@@ -27,6 +28,7 @@ export default function App() {
           <Route path="/quizzes/phishing"       element={<QuizPhishing />} />
           <Route path="/quizzes/sms"            element={<QuizSMS />} />
           <Route path="/quizzes/deepfake"       element={<QuizDeepfake />} />
+          <Route path="/scam-simulator"         element={<ScamSimulator />} />
           {/* Catch-all → Login */}
           <Route path="*"                       element={<Navigate to="/login" replace />} />
         </Routes>

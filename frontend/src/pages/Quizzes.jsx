@@ -60,24 +60,24 @@ export default function Quizzes() {
   ];
 
   return (
-    <div className="min-h-screen bg-blue-50 flex flex-col">
+    <div className="min-h-screen bg-emerald-50 flex flex-col">
       <Navbar />
 
       <main className="flex-1 w-full max-w-3xl mx-auto px-4 py-8">
         {/* Back */}
         <button
           onClick={() => navigate('/dashboard')}
-          className="flex items-center gap-2 text-blue-700 font-bold text-lg mb-8 hover:text-blue-900 focus:outline-none focus:ring-4 focus:ring-blue-400 rounded-xl p-1 min-h-[44px]"
+          className="flex items-center gap-2 text-emerald-700 font-bold text-lg mb-8 hover:text-emerald-900 focus:outline-none focus:ring-4 focus:ring-emerald-400 rounded-xl p-1 min-h-[44px]"
           aria-label="Go back to home"
         >
           <ArrowLeft className="w-6 h-6" aria-hidden="true" /> {t('back')}
         </button>
 
         {/* Header */}
-        <div className="card p-6 sm:p-8 mb-8 bg-gradient-to-br from-teal-600 to-blue-700 text-white border-0 shadow-lg">
-          <p className="text-xl font-semibold mb-1 text-teal-200">🧩 {t('quizzes')}</p>
+        <div className="card p-6 sm:p-8 mb-8 bg-gradient-to-br from-emerald-600 to-teal-700 text-white border-0 shadow-lg">
+          <p className="text-xl font-semibold mb-1 text-emerald-200">🧩 {t('quizzes')}</p>
           <h1 className="text-4xl font-black leading-tight mb-3">{t('quiz_hero_title')}</h1>
-          <p className="text-lg text-blue-100 font-medium">
+          <p className="text-lg text-emerald-100 font-medium">
             {t('quiz_hero_desc')}
           </p>
         </div>

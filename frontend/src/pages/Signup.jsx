@@ -11,7 +11,8 @@ export default function Signup() {
     mobileNumber: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    language: 'english'
   };
   
   const [formState, setFormState] = useState(formData);
@@ -137,6 +138,23 @@ export default function Signup() {
           placeholder="Type the exact same password"
           error={errors.confirmPassword}
         />
+
+        <div className="flex flex-col gap-2 w-full mb-8 relative">
+          <label htmlFor="language" className="text-xl font-bold text-slate-800 flex items-center">
+            Preferred Language
+          </label>
+          <select
+            id="language"
+            name="language"
+            value={formState.language}
+            onChange={handleChange}
+            className="w-full px-5 py-4 text-xl border-4 rounded-xl focus-ring transition-colors border-slate-300 bg-white hover:border-slate-400 appearance-none cursor-pointer"
+          >
+            <option value="english">English</option>
+            <option value="hindi">Hindi</option>
+            <option value="marathi">Marathi</option>
+          </select>
+        </div>
 
         <button 
           type="submit" 

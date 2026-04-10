@@ -19,13 +19,59 @@ export default function Simulations() {
         <button
           onClick={() => navigate('/dashboard')}
           className="flex items-center gap-2 text-blue-700 font-bold text-lg mb-8 hover:text-blue-900 focus:outline-none focus:ring-4 focus:ring-blue-400 rounded-xl p-1 min-h-[44px]"
-          aria-label="Go back to home"
+          aria-label={t('aria_go_back_home')}
         >
           <ArrowLeft className="w-6 h-6" aria-hidden="true" /> {t('back_to_home')}
         </button>
 
         <h1 className="text-4xl font-black text-slate-900 mb-2">{t('sim_hero_title')}</h1>
         <p className="text-xl text-slate-600 font-medium mb-8">{t('sim_hero_desc')}</p>
+
+        {/* What, Why, How Section */}
+        <div className="card p-6 bg-white border-2 border-slate-100 mb-10 overflow-hidden max-w-2xl">
+          <h2 className="text-2xl font-black text-slate-800 mb-6 flex items-center gap-3">
+            <span className="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center text-xl">💡</span>
+            {t('sim_hero_title')}?
+          </h2>
+
+          <div className="space-y-2 divide-y divide-slate-100">
+            {/* What */}
+            <div className="flex items-start gap-4 pb-2 relative group">
+              <div className="absolute top-0 right-0">
+                <SpeakButton text={`${t('label_what')}. ${t('sim_what_is_it')}`} />
+              </div>
+              <div className="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center text-2xl shrink-0">🛡️</div>
+              <div className="pr-10">
+                <p className="font-black text-indigo-900 text-lg mb-1">{t('label_what')}</p>
+                <p className="text-slate-600 font-medium leading-relaxed">{t('sim_what_is_it')}</p>
+              </div>
+            </div>
+
+            {/* Why */}
+            <div className="flex items-start gap-4 py-2 relative group">
+              <div className="absolute top-2 right-0">
+                <SpeakButton text={`${t('label_why')}. ${t('sim_why_do_it')}`} />
+              </div>
+              <div className="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center text-2xl shrink-0">🚀</div>
+              <div className="pr-10">
+                <p className="font-black text-teal-900 text-lg mb-1">{t('label_why')}</p>
+                <p className="text-slate-600 font-medium leading-relaxed">{t('sim_why_do_it')}</p>
+              </div>
+            </div>
+
+            {/* How */}
+            <div className="flex items-start gap-4 pt-2 relative group">
+              <div className="absolute top-2 right-0">
+                <SpeakButton text={`${t('label_how')}. ${t('sim_how_to_do_it')}`} />
+              </div>
+              <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center text-2xl shrink-0">👉</div>
+              <div className="pr-10">
+                <p className="font-black text-orange-900 text-lg mb-1">{t('label_how')}</p>
+                <p className="text-slate-600 font-medium leading-relaxed">{t('sim_how_to_do_it')}</p>
+              </div>
+            </div>
+          </div>
+        </div>
 
         {/* Square Cards */}
         <div className="grid grid-cols-2 gap-5 max-w-md">
@@ -40,7 +86,7 @@ export default function Simulations() {
                        border-2 border-transparent hover:border-indigo-300 hover:shadow-xl
                        focus:outline-none focus:ring-4 focus:ring-indigo-400 focus:ring-offset-2
                        transition-all duration-200 active:scale-95 group cursor-pointer relative"
-            aria-label="Password Security simulation"
+            aria-label={t('aria_pass_sim')}
           >
             <div className="absolute top-3 right-3">
               <SpeakButton text={t('mod1_title')} />
@@ -64,7 +110,7 @@ export default function Simulations() {
                        border-2 border-transparent hover:border-teal-300 hover:shadow-xl
                        focus:outline-none focus:ring-4 focus:ring-teal-400 focus:ring-offset-2
                        transition-all duration-200 active:scale-95 group cursor-pointer relative"
-            aria-label="UPI Payment simulation"
+            aria-label={t('aria_upi_sim')}
           >
             <div className="absolute top-3 right-3">
               <SpeakButton text={t('mod2_title')} />

@@ -23,6 +23,8 @@ import {
 import axios from 'axios';
 import { useLanguage } from '../context/LanguageContext';
 import Navbar from '../components/Navbar';
+import { ReactTransliterate } from 'react-transliterate';
+import 'react-transliterate/dist/index.css';
 
 // --- Scam Scenarios Data ---
 const SCENARIOS = [
@@ -32,14 +34,9 @@ const SCENARIOS = [
     color: 'blue',
     titleKey: 'bank_otp_title',
     descKey: 'bank_otp_desc',
-    initialMessage: "Hello, this is SBI customer support. Your account will be blocked today due to suspicious activity. Please share your OTP immediately to verify your identity.",
-    tactic: "Urgency and Authority Impersonation",
-    redFlags: ["Urgent threat (blocking account)", "Request for OTP", "Unexpected contact"],
-    difficultyResponses: {
-      beginner: "Please send OTP now. We are waiting.",
-      intermediate: "We have detected a login from a different city. For your safety, we need the 6-digit code sent to your mobile.",
-      advanced: "Your KYC has expired. To avoid account freeze under RBI guidelines, please authenticate using the one-time password just sent to you."
-    }
+    initialMessageKey: 'bank_otp_initial',
+    tacticKey: 'bank_otp_tactic',
+    redFlagsKeys: ['bank_otp_rf1', 'bank_otp_rf2', 'bank_otp_rf3'],
   },
   {
     id: 'lottery',
@@ -47,14 +44,9 @@ const SCENARIOS = [
     color: 'yellow',
     titleKey: 'lottery_title',
     descKey: 'lottery_desc',
-    initialMessage: "Congratulations! You have won a cash prize of ₹25,00,000 in the KBC Lucky Draw. To claim your prize, please send your Aadhaar card photo and bank details.",
-    tactic: "Greed and Excitement",
-    redFlags: ["Too good to be true", "Request for sensitive personal documents", "Unknown source"],
-    difficultyResponses: {
-      beginner: "You are the winner! Just send account number to get money.",
-      intermediate: "To process your winning amount, a small registration fee of ₹500 is required. Pay now to release the funds.",
-      advanced: "Sir, your prize money is ready for transfer. We just need to verify your linked account. Could you please share the last 4 digits of your card?"
-    }
+    initialMessageKey: 'lottery_initial',
+    tacticKey: 'lottery_tactic',
+    redFlagsKeys: ['lottery_rf1', 'lottery_rf2', 'lottery_rf3'],
   },
   {
     id: 'delivery',
@@ -62,14 +54,9 @@ const SCENARIOS = [
     color: 'teal',
     titleKey: 'delivery_title',
     descKey: 'delivery_desc',
-    initialMessage: "Your package is held at our warehouse due to an incomplete address. Please click this link to update your details or pay ₹5 for re-delivery: www.amazn-delivery-fix.com",
-    tactic: "Curiosity and Low Stakes (Small Amount)",
-    redFlags: ["Suspicious link (misspelled URL)", "Small payment for re-delivery", "Vague package info"],
-    difficultyResponses: {
-      beginner: "Link is safe. Click now or package is returned.",
-      intermediate: "The delivery attempt failed at 11:30 AM. Use the link to reschedule for this evening.",
-      advanced: "Tracking ID: PKG9901X has been paused. Our system needs a small re-validation fee to confirm your local delivery hub."
-    }
+    initialMessageKey: 'delivery_initial',
+    tacticKey: 'delivery_tactic',
+    redFlagsKeys: ['delivery_rf1', 'delivery_rf2', 'delivery_rf3'],
   },
   {
     id: 'friend',
@@ -77,21 +64,16 @@ const SCENARIOS = [
     color: 'purple',
     titleKey: 'friend_title',
     descKey: 'friend_desc',
-    initialMessage: "Hey, it's me! I'm in a huge trouble. I'm at the hospital with a friend and my UPI is not working. Can you please send ₹2,000 urgently? I'll pay you back tonight.",
-    tactic: "Emotional Manipulation and Panic",
-    redFlags: ["Urgent money request", "Claims emergency", "Unusual communication method"],
-    difficultyResponses: {
-      beginner: "Bro please help, it's urgent!",
-      intermediate: "I've tried everyone, you are my last hope. Don't call, I'm inside the ICU.",
-      advanced: "Listen, I'm stuck at the pharmacy and they don't accept cards. Just send it to this number, it's the chemist's UPI."
-    }
+    initialMessageKey: 'friend_initial',
+    tacticKey: 'friend_tactic',
+    redFlagsKeys: ['friend_rf1', 'friend_rf2', 'friend_rf3'],
   }
 ];
 
 // --- Main Page Component ---
 export default function SimulationScam() {
   const navigate = useNavigate();
-  const { t } = useLanguage();
+  const { lang, t } = useLanguage();
   const scrollRef = useRef(null);
 
   // States
@@ -140,7 +122,7 @@ export default function SimulationScam() {
     const firstMsg = {
       id: 1,
       sender: 'ai',
-      text: selectedScenario.initialMessage,
+      text: t(selectedScenario.initialMessageKey),
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     };
     setMessages([firstMsg]);
@@ -168,7 +150,8 @@ export default function SimulationScam() {
         message: currentInput,
         history: updatedMessages.slice(0, -1),
         scenario: selectedScenario.id,
-        difficulty: difficulty
+        difficulty: difficulty,
+        language: lang
       });
 
       const { evaluation, text, time } = res.data;
@@ -293,7 +276,8 @@ export default function SimulationScam() {
             history: messages, // history before verifyMsg
             scenario: selectedScenario.id,
             difficulty: difficulty,
-            skipEvaluation: true // IMPORTANT: Bypass SUCCESS detection
+            skipEvaluation: true, // IMPORTANT: Bypass SUCCESS detection
+            language: lang
           });
           const aiMsg = {
             id: Date.now() + 1,
@@ -519,12 +503,12 @@ export default function SimulationScam() {
                   <div className="bg-white/50 p-4 rounded-xl border border-black/5">
                     <p className="font-black text-sm uppercase tracking-wider text-slate-500 mb-3">Tactics Targeted in this Simulation:</p>
                     <div className="mb-4 bg-blue-100/50 p-3 rounded-lg border border-blue-200">
-                      <p className="font-bold text-blue-900">{selectedScenario.tactic}</p>
+                      <p className="font-bold text-blue-900">{t(selectedScenario.tacticKey)}</p>
                     </div>
                     <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                      {selectedScenario.redFlags.map((flag, idx) => (
+                      {selectedScenario.redFlagsKeys.map((flagKey, idx) => (
                         <li key={idx} className="flex items-center gap-3 text-base font-bold text-slate-600">
-                          <AlertTriangle className="w-5 h-5 text-amber-500 shrink-0" /> {flag}
+                          <AlertTriangle className="w-5 h-5 text-amber-500 shrink-0" /> {t(flagKey)}
                         </li>
                       ))}
                     </ul>
@@ -589,14 +573,16 @@ export default function SimulationScam() {
 
         {/* Text Input */}
         <div className="flex gap-2 p-1">
-          <input
-            type="text"
+          <ReactTransliterate
             value={userInput}
-            onChange={(e) => setUserInput(e.target.value)}
+            onChangeText={(text) => setUserInput(text)}
             onKeyDown={(e) => e.key === 'Enter' && handleSend()}
             disabled={isGameOver}
-            placeholder={isGameOver ? "Simulation Over" : "Type your response safely..."}
-            className="flex-1 bg-slate-100 border-2 border-transparent focus:border-blue-400 focus:bg-white rounded-2xl px-5 py-4 text-lg font-medium outline-none transition-all disabled:opacity-50"
+            lang={lang === 'hindi' ? 'hi' : lang === 'marathi' ? 'mr' : 'hi'}
+            enabled={lang !== 'english'}
+            placeholder={isGameOver ? t('sim_over') : t('type_response')}
+            className="w-full h-full bg-slate-100 border-2 border-transparent focus:border-blue-400 focus:bg-white rounded-2xl px-5 py-4 text-lg font-medium outline-none transition-all disabled:opacity-50"
+            containerClassName="flex-1 flex"
           />
           <button
             onClick={handleSend}

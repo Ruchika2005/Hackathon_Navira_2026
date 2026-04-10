@@ -2,11 +2,16 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { User, Phone, Mail, Lock, Eye, EyeOff, Globe, ArrowRight, ArrowLeft, HelpCircle, CheckCircle } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
+import LanguageSelector from '../components/LanguageSelector';
+import { ReactTransliterate } from 'react-transliterate';
+import 'react-transliterate/dist/index.css';
 
 const STEPS = ['Your Name', 'Contact', 'Password', 'Language'];
 
 export default function Signup() {
   const navigate  = useNavigate();
+  const { t, setLang } = useLanguage();
   const [step, setStep]   = useState(0); // 0-3
   const [form, setForm]   = useState({
     userName: '', mobileNumber: '', email: '',
@@ -49,7 +54,10 @@ export default function Signup() {
     try {
       const res = await axios.post('/api/auth/signup', form);
       localStorage.setItem('token', res.data.token);
-      if (res.data.language) localStorage.setItem('language', res.data.language);
+      if (res.data.language) {
+        localStorage.setItem('language', res.data.language);
+        setLang(res.data.language);
+      }
       navigate('/dashboard');
     } catch (err) {
       setApiError(err.response?.data?.message || 'Something went wrong. Please try again.');
@@ -71,13 +79,15 @@ export default function Signup() {
         <label htmlFor="userName" className="input-label">
           <User className="inline w-5 h-5 mr-2 text-blue-700" /> Your Full Name
         </label>
-        <input
-          id="userName" type="text"
+        <ReactTransliterate
+          id="userName"
           value={form.userName}
-          onChange={e => setField('userName', e.target.value)}
-          className={`input-field text-xl ${errors.userName ? 'border-red-400' : ''}`}
+          onChangeText={text => setField('userName', text)}
+          lang={form.language === 'hindi' ? 'hi' : form.language === 'marathi' ? 'mr' : 'hi'}
+          enabled={form.language !== 'english'}
+          className={`input-field text-xl w-full ${errors.userName ? 'border-red-400' : ''}`}
           placeholder="e.g. Ramesh Kumar"
-          aria-describedby={errors.userName ? 'name-err' : undefined}
+          containerClassName="w-full flex block"
         />
         {errors.userName && <p id="name-err" className="mt-2 text-red-700 font-semibold">⚠️ {errors.userName}</p>}
       </div>
@@ -183,12 +193,16 @@ export default function Signup() {
   ];
 
   return (
-    <div className="min-h-screen bg-blue-50 flex flex-col items-center justify-center px-4 py-10">
+    <div className="min-h-screen bg-blue-50 flex flex-col items-center justify-center px-4 py-10 relative">
+
+      <div className="absolute top-4 right-4">
+        <LanguageSelector />
+      </div>
 
       {/* Brand */}
       <div className="text-center mb-6">
-        <h1 className="text-3xl font-black text-blue-900">Create Your Account</h1>
-        <p className="text-lg text-slate-600 mt-1">It only takes a minute!</p>
+        <h1 className="text-3xl font-black text-blue-900">{t('signup_title')}</h1>
+        <p className="text-lg text-slate-600 mt-1">{t('signup_subtitle')}</p>
       </div>
 
       {/* Progress */}
@@ -220,12 +234,12 @@ export default function Signup() {
         <div className="flex gap-4 mt-8">
           {step > 0 && (
             <button onClick={prev} className="btn-secondary flex-1">
-              <ArrowLeft className="w-5 h-5" /> Back
+              <ArrowLeft className="w-5 h-5" /> {t('btn_back')}
             </button>
           )}
           {step < STEPS.length - 1 ? (
             <button onClick={next} className="btn-primary flex-1">
-              Next <ArrowRight className="w-5 h-5" />
+              {t('btn_next')} <ArrowRight className="w-5 h-5" />
             </button>
           ) : (
             <button
@@ -234,7 +248,7 @@ export default function Signup() {
               className={`btn-primary flex-1 ${isLoading ? 'opacity-60 cursor-not-allowed' : ''}`}
               aria-busy={isLoading}
             >
-              {isLoading ? '⏳ Creating account…' : '🎉 Create Account'}
+              {isLoading ? '⏳ ...' : t('btn_create')}
             </button>
           )}
         </div>
@@ -242,9 +256,9 @@ export default function Signup() {
         {/* Link to login */}
         {step === 0 && (
           <p className="text-center text-lg text-slate-600 mt-6 font-medium">
-            Already have an account?{' '}
+            {t('already_have')}{' '}
             <Link to="/login" className="text-blue-700 font-bold underline hover:text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-400 rounded">
-              Sign in here
+              {t('sign_in_here')}
             </Link>
           </p>
         )}

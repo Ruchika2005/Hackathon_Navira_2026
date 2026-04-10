@@ -400,7 +400,7 @@ export default function QuizPhishing() {
               <p className={`font-black text-lg mb-2 ${
                 q.options[selected].correct ? 'text-green-800' : 'text-amber-800'
               }`}>
-                {q.options[selected].correct ? '✅ Correct!' : '❌ Not quite — here\'s why:'}
+                {q.options[selected].correct ? t('correct_msg') : t('incorrect_msg')}
               </p>
               <div className="space-y-1">
                 {q.feedback.lines.map((line, i) => (

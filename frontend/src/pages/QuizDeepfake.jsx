@@ -251,24 +251,59 @@ export default function QuizDeepfake() {
           </div>
 
           {/* Feedback */}
-          {selected !== null && (
-            <div className={`card p-5 mb-5 pop-in border-2 relative pr-16 ${q.options[selected].correct ? 'bg-green-50 border-green-300' : 'bg-amber-50 border-amber-300'}`}>
-              <div className="absolute top-4 right-4 z-10">
-                <SpeakButton text={`${q.options[selected].correct ? t('correct_msg') : t('incorrect_msg')}. ${q.feedback.lines.join(' ')}`} />
+          {selected !== null && (() => {
+            const opt = q.options[selected];
+            const isCorrect = opt.correct;
+            const optLetter = String.fromCharCode(65 + selected);
+            return (
+              <div
+                className="card mb-5 pop-in border-2 overflow-hidden"
+                style={{ borderColor: isCorrect ? '#16a34a' : '#dc2626' }}
+              >
+                {/* Header bar */}
+                <div
+                  className="px-5 py-3 flex items-center justify-between gap-3"
+                  style={{ background: isCorrect ? '#16a34a' : '#dc2626' }}
+                >
+                  <div className="flex items-center gap-2 flex-1 min-w-0">
+                    <span className="text-white font-black text-base flex-shrink-0">
+                      {isCorrect ? '✔ Correct' : '✘ Incorrect'}
+                    </span>
+                    <span className="text-white/80 text-sm font-semibold truncate">
+                      — Option {optLetter}: {opt.text}
+                    </span>
+                  </div>
+                  <SpeakButton text={`Option ${optLetter}: ${opt.text}. ${isCorrect ? 'Correct' : 'Incorrect'}. ${opt.customFeedback}. Learning: ${q.feedback.lines.join(' ')}`} />
+                </div>
+                {/* Body */}
+                <div className="px-5 py-4 space-y-4" style={{ background: isCorrect ? '#f0fdf4' : '#fff7f7' }}>
+                  <div>
+                    <p className="text-xs font-black uppercase tracking-wider mb-1"
+                      style={{ color: isCorrect ? '#15803d' : '#b91c1c' }}>
+                      {isCorrect ? 'Why this is correct:' : 'Why this is wrong:'}
+                    </p>
+                    <p className="text-sm font-medium text-slate-700 leading-relaxed">
+                      {opt.customFeedback}
+                    </p>
+                  </div>
+                  <div className="border-t" style={{ borderColor: isCorrect ? '#bbf7d0' : '#fecaca' }} />
+                  <div>
+                    <p className="text-xs font-black uppercase tracking-wider mb-2 text-slate-500">
+                      Learning
+                    </p>
+                    <div className="space-y-1">
+                      {q.feedback.lines.map((line, i) => (
+                        <p key={i} className="text-sm font-semibold flex items-start gap-2 text-slate-700">
+                          <span className="flex-shrink-0 mt-0.5">{i === 0 ? q.feedback.icon : '•'}</span>
+                          {line}
+                        </p>
+                      ))}
+                    </div>
+                  </div>
+                </div>
               </div>
-              <p className={`font-black text-lg mb-2 ${q.options[selected].correct ? 'text-green-800' : 'text-amber-800'}`}>
-                {q.options[selected].correct ? t('correct_msg') : t('incorrect_msg')}
-              </p>
-              <div className="space-y-1">
-                {q.feedback.lines.map((line, i) => (
-                  <p key={i} className={`text-sm font-medium flex items-start gap-2 ${q.options[selected].correct ? 'text-green-800' : 'text-amber-800'}`}>
-                    <span className="flex-shrink-0">{i === 0 ? q.feedback.icon : '•'}</span>
-                    <span>{line}</span>
-                  </p>
-                ))}
-              </div>
-            </div>
-          )}
+            );
+          })()}
 
           {/* Next button */}
           {selected !== null && (

@@ -4,6 +4,7 @@ import { ArrowLeft, CheckCircle, XCircle, RefreshCw } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import { useLanguage } from '../context/LanguageContext';
 import { quizData } from '../data/quizData';
+import SpeakButton from '../components/SpeakButton';
 
 export default function QuizSMS() {
   const navigate = useNavigate();
@@ -163,7 +164,10 @@ export default function QuizSMS() {
 
         {/* SMS mockup */}
         <div className="slide-up" key={`${q.id}-${lang}`}>
-          <div className="rounded-2xl border-2 border-slate-300 overflow-hidden shadow-md mb-6">
+          <div className="rounded-2xl border-2 border-slate-300 overflow-hidden shadow-md mb-6 relative">
+            <div className="absolute top-2 right-4 z-10">
+              <SpeakButton text={`${t('quiz_cat_sms_title')}. From: ${q.sms.from}. Message: ${q.sms.body}`} />
+            </div>
             <div className="bg-slate-800 px-4 py-2 flex items-center gap-3">
               <div className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-white font-black text-sm">S</div>
               <div>
@@ -201,7 +205,10 @@ export default function QuizSMS() {
 
           {/* Question */}
           <div className="card p-5 mb-4 shadow-sm border-2 border-slate-100">
-            <p className="text-lg font-black text-slate-900 mb-4">🎯 {q.question}</p>
+            <div className="flex items-start justify-between gap-4 mb-4">
+              <p className="text-lg font-black text-slate-900 flex-1">🎯 {q.question}</p>
+              <SpeakButton text={q.question} />
+            </div>
             <div className="flex flex-col gap-3">
               {q.options.map((opt, idx) => {
                 let style = 'border-2 border-slate-200 bg-white hover:border-orange-400 hover:bg-orange-50';
@@ -239,7 +246,10 @@ export default function QuizSMS() {
 
           {/* Feedback */}
           {selected !== null && (
-            <div className={`card p-5 mb-5 pop-in border-2 ${q.options[selected].correct ? 'bg-green-50 border-green-300' : 'bg-amber-50 border-amber-300'}`}>
+            <div className={`card p-5 mb-5 pop-in border-2 relative pr-16 ${q.options[selected].correct ? 'bg-green-50 border-green-300' : 'bg-amber-50 border-amber-300'}`}>
+              <div className="absolute top-4 right-4 z-10">
+                <SpeakButton text={`${q.options[selected].correct ? t('correct_msg') : t('incorrect_msg')}. ${q.feedback.lines.join(' ')}`} />
+              </div>
               <p className={`font-black text-lg mb-2 ${q.options[selected].correct ? 'text-green-800' : 'text-amber-800'}`}>
                 {q.options[selected].correct ? t('correct_msg') : t('incorrect_msg')}
               </p>

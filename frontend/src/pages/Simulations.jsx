@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ShieldCheck, Smartphone, ArrowLeft, ShieldAlert } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import Navbar from '../components/Navbar';
+import SpeakButton from '../components/SpeakButton';
 
 export default function Simulations() {
   const navigate = useNavigate();
@@ -30,14 +31,20 @@ export default function Simulations() {
         <div className="grid grid-cols-2 gap-5 max-w-md">
 
           {/* Module 1 */}
-          <button
+          <div
+            role="button"
+            tabIndex="0"
             onClick={() => navigate('/simulations/password')}
+            onKeyDown={(e) => { if (e.key === 'Enter') navigate('/simulations/password'); }}
             className="card aspect-square flex flex-col items-center justify-center gap-4 p-6
                        border-2 border-transparent hover:border-indigo-300 hover:shadow-xl
                        focus:outline-none focus:ring-4 focus:ring-indigo-400 focus:ring-offset-2
-                       transition-all duration-200 active:scale-95 group cursor-pointer"
+                       transition-all duration-200 active:scale-95 group cursor-pointer relative"
             aria-label="Password Security simulation"
           >
+            <div className="absolute top-3 right-3">
+              <SpeakButton text={t('mod1_title')} />
+            </div>
             <div className="w-16 h-16 bg-indigo-100 rounded-2xl flex items-center justify-center group-hover:bg-indigo-200 transition-colors">
               <ShieldCheck className="w-9 h-9 text-indigo-700" aria-hidden="true" />
             </div>
@@ -45,17 +52,23 @@ export default function Simulations() {
               <p className="text-xl font-black text-slate-900 leading-tight">{t('mod1_title')}</p>
               <p className="text-sm text-indigo-700 font-bold mt-1">▶  {t('btn_start')}</p>
             </div>
-          </button>
+          </div>
 
           {/* Module 2 */}
-          <button
+          <div
+            role="button"
+            tabIndex="0"
             onClick={() => navigate('/simulations/upi')}
+            onKeyDown={(e) => { if (e.key === 'Enter') navigate('/simulations/upi'); }}
             className="card aspect-square flex flex-col items-center justify-center gap-4 p-6
                        border-2 border-transparent hover:border-teal-300 hover:shadow-xl
                        focus:outline-none focus:ring-4 focus:ring-teal-400 focus:ring-offset-2
-                       transition-all duration-200 active:scale-95 group cursor-pointer"
+                       transition-all duration-200 active:scale-95 group cursor-pointer relative"
             aria-label="UPI Payment simulation"
           >
+            <div className="absolute top-3 right-3">
+              <SpeakButton text={t('mod2_title')} />
+            </div>
             <div className="w-16 h-16 bg-teal-100 rounded-2xl flex items-center justify-center group-hover:bg-teal-200 transition-colors">
               <Smartphone className="w-9 h-9 text-teal-700" aria-hidden="true" />
             </div>
@@ -63,7 +76,7 @@ export default function Simulations() {
               <p className="text-xl font-black text-slate-900 leading-tight">{t('mod2_title')}</p>
               <p className="text-sm text-teal-700 font-bold mt-1">▶  {t('btn_start')}</p>
             </div>
-          </button>
+          </div>
 
         </div>
 

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Mail, MessageSquare, Video, ChevronRight } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import { useLanguage } from '../context/LanguageContext';
+import SpeakButton from '../components/SpeakButton';
 
 export default function Quizzes() {
   const navigate = useNavigate();
@@ -88,14 +89,20 @@ export default function Quizzes() {
         <div className="flex flex-col gap-5">
           {quizCategories.map((cat) => {
             return (
-              <button
+              <div
                 key={cat.id}
+                role="button"
+                tabIndex="0"
                 onClick={() => navigate(cat.path)}
+                onKeyDown={(e) => { if (e.key === 'Enter') navigate(cat.path); }}
                 className={`card p-6 text-left group border-2 border-transparent ${cat.borderHover}
                            hover:shadow-xl focus:outline-none focus:ring-4 ${cat.ringClass} focus:ring-offset-2
-                           transition-all duration-200 active:scale-[0.98] w-full cursor-pointer`}
+                           transition-all duration-200 active:scale-[0.98] w-full cursor-pointer relative`}
                 aria-label={`Start ${t(cat.titleKey)} quiz`}
               >
+                <div className="absolute top-4 right-4 z-10">
+                  <SpeakButton text={`${t(cat.titleKey)}. ${t(cat.descKey)}`} />
+                </div>
                 <div className="flex items-start gap-5">
                   <div className={`w-16 h-16 ${cat.bgClass} rounded-2xl flex items-center justify-center flex-shrink-0 transition-colors duration-200`}>
                     <span className="text-3xl" role="img" aria-hidden="true">{cat.emoji}</span>
@@ -116,7 +123,7 @@ export default function Quizzes() {
                     </div>
                   </div>
                 </div>
-              </button>
+              </div>
             );
           })}
         </div>

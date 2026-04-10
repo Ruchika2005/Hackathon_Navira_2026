@@ -4,6 +4,7 @@ import { ArrowLeft, CheckCircle, XCircle, RefreshCw } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import { useLanguage } from '../context/LanguageContext';
 import { quizData } from '../data/quizData';
+import SpeakButton from '../components/SpeakButton';
 
 export default function QuizDeepfake() {
   const navigate = useNavigate();
@@ -172,9 +173,12 @@ export default function QuizDeepfake() {
 
         {/* Social post mockup */}
         <div className="slide-up" key={`${q.id}-${lang}`}>
-          <div className="rounded-2xl border-2 border-slate-300 overflow-hidden shadow-md mb-6">
+          <div className="rounded-2xl border-2 border-slate-300 overflow-hidden shadow-md mb-6 relative">
+            <div className="absolute top-2 right-4 z-10 text-white">
+              <SpeakButton text={`${q.post.platform} Post by ${q.post.user}. ${q.post.title}. Warning: ${q.post.warning}`} />
+            </div>
             {/* Platform bar */}
-            <div className="px-4 py-2 flex items-center gap-2 text-white font-bold text-sm" style={{ background: q.post.platformColor }}>
+            <div className="px-4 py-2 flex items-center gap-2 text-white font-bold text-sm pr-16" style={{ background: q.post.platformColor }}>
               <span>{platformIcons[q.post.platform] || '🌐'}</span>
               <span>{q.post.platform}</span>
             </div>
@@ -207,7 +211,10 @@ export default function QuizDeepfake() {
 
           {/* Question */}
           <div className="card p-5 mb-4 shadow-sm border-2 border-slate-100">
-            <p className="text-lg font-black text-slate-900 mb-4">🎯 {q.question}</p>
+            <div className="flex items-start justify-between gap-4 mb-4">
+              <p className="text-lg font-black text-slate-900 flex-1">🎯 {q.question}</p>
+              <SpeakButton text={q.question} />
+            </div>
             <div className="flex flex-col gap-3">
               {q.options.map((opt, idx) => {
                 let style = 'border-2 border-slate-200 bg-white hover:border-purple-400 hover:bg-purple-50';
@@ -245,7 +252,10 @@ export default function QuizDeepfake() {
 
           {/* Feedback */}
           {selected !== null && (
-            <div className={`card p-5 mb-5 pop-in border-2 ${q.options[selected].correct ? 'bg-green-50 border-green-300' : 'bg-amber-50 border-amber-300'}`}>
+            <div className={`card p-5 mb-5 pop-in border-2 relative pr-16 ${q.options[selected].correct ? 'bg-green-50 border-green-300' : 'bg-amber-50 border-amber-300'}`}>
+              <div className="absolute top-4 right-4 z-10">
+                <SpeakButton text={`${q.options[selected].correct ? t('correct_msg') : t('incorrect_msg')}. ${q.feedback.lines.join(' ')}`} />
+              </div>
               <p className={`font-black text-lg mb-2 ${q.options[selected].correct ? 'text-green-800' : 'text-amber-800'}`}>
                 {q.options[selected].correct ? t('correct_msg') : t('incorrect_msg')}
               </p>

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Eye, EyeOff, CheckCircle, AlertCircle, ShieldCheck } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import Navbar from '../components/Navbar';
+import SpeakButton from '../components/SpeakButton';
 
 function RuleRow({ valid, active, label, suggestion }) {
   return (
@@ -16,7 +17,7 @@ function RuleRow({ valid, active, label, suggestion }) {
           ? <CheckCircle className="w-6 h-6 text-green-600" aria-label="Done" />
           : <AlertCircle className={`w-6 h-6 ${active ? 'text-orange-500' : 'text-slate-300'}`} aria-label="Not yet" />}
       </div>
-      <div>
+      <div className="flex-1">
         <p className={`text-lg font-bold leading-snug ${valid ? 'text-green-800' : active ? 'text-orange-800' : 'text-slate-500'}`}>
           {label}
         </p>
@@ -25,6 +26,9 @@ function RuleRow({ valid, active, label, suggestion }) {
             👉 {suggestion}
           </p>
         )}
+      </div>
+      <div className="shrink-0 mt-1">
+        <SpeakButton text={active && !valid ? `${label}. ${suggestion}` : label} />
       </div>
     </div>
   );

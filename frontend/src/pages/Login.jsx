@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Phone, Lock, Eye, EyeOff, ArrowRight, HelpCircle, CheckCircle } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import LanguageSelector from '../components/LanguageSelector';
+import SpeakButton from '../components/SpeakButton';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -60,16 +61,21 @@ export default function Login() {
       </div>
 
       {/* Login Card */}
-      <div className="card w-full max-w-md p-8 slide-up">
-
-        <h2 className="text-3xl font-black text-slate-900 mb-2">{t('login_title')}</h2>
+      <div className="card w-full max-w-md p-8 slide-up relative">
+        <h2 className="text-3xl font-black text-slate-900 mb-2 pr-10">{t('login_title')}</h2>
         <p className="text-lg text-slate-600 mb-8">{t('login_subtitle')}</p>
+        <div className="absolute top-8 right-8">
+          <SpeakButton text={`${t('login_title')}. ${t('login_subtitle')}`} />
+        </div>
 
         {/* Error Banner */}
         {apiError && (
-          <div role="alert" className="flex items-start gap-3 bg-red-50 border-2 border-red-300 rounded-2xl p-4 mb-6">
+          <div role="alert" className="flex items-start gap-3 bg-red-50 border-2 border-red-300 rounded-2xl p-4 mb-6 relative">
+            <div className="absolute top-2 right-2">
+              <SpeakButton text={`${t('login_err_title')}. ${apiError}`} />
+            </div>
             <span className="text-red-600 text-2xl mt-0.5" aria-hidden="true">⚠️</span>
-            <div>
+            <div className="pr-10">
               <p className="font-bold text-red-800 text-lg">{t('login_err_title')}</p>
               <p className="text-red-700 text-base mt-1">{apiError}</p>
             </div>
@@ -96,9 +102,12 @@ export default function Login() {
               aria-invalid={!!errors.mobile}
             />
             {errors.mobile && (
-              <p id="mobile-error" className="mt-2 text-red-700 text-base font-semibold flex items-center gap-1">
-                ⚠️ {errors.mobile}
-              </p>
+              <div className="flex items-center justify-between gap-2 mt-2 bg-red-50 p-2 rounded-xl border border-red-200">
+                <p id="mobile-error" className="text-red-700 text-base font-semibold flex items-center gap-1">
+                  ⚠️ {errors.mobile}
+                </p>
+                <SpeakButton text={errors.mobile} />
+              </div>
             )}
           </div>
 
@@ -129,7 +138,12 @@ export default function Login() {
               </button>
             </div>
             {errors.password && (
-              <p id="pass-error" className="mt-2 text-red-700 text-base font-semibold">⚠️ {errors.password}</p>
+              <div className="flex items-center justify-between gap-2 mt-2 bg-red-50 p-2 rounded-xl border border-red-200">
+                <p id="pass-error" className="text-red-700 text-base font-semibold flex items-center gap-1">
+                  ⚠️ {errors.password}
+                </p>
+                <SpeakButton text={errors.password} />
+              </div>
             )}
           </div>
 

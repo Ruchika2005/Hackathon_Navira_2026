@@ -23,7 +23,7 @@ export default function Quizzes() {
       tagBg: 'bg-red-600',
       path: '/quizzes/phishing',
       questions: 8,
-      level: 'Beginner–Intermediate',
+      levelKey: 'level_beginner_intermediate',
     },
     {
       id: 'sms',
@@ -39,7 +39,7 @@ export default function Quizzes() {
       tagBg: 'bg-orange-500',
       path: '/quizzes/sms',
       questions: 6,
-      level: 'Beginner',
+      levelKey: 'level_beginner',
     },
     {
       id: 'deepfake',
@@ -55,7 +55,7 @@ export default function Quizzes() {
       tagBg: 'bg-purple-600',
       path: '/quizzes/deepfake',
       questions: 6,
-      level: 'Intermediate',
+      levelKey: 'level_intermediate',
     },
   ];
 
@@ -104,12 +104,12 @@ export default function Quizzes() {
                     <div className="flex items-center gap-3 flex-wrap mb-1">
                       <h3 className="text-2xl font-black text-slate-900">{t(cat.titleKey)}</h3>
                       <span className={`text-xs text-white font-bold px-3 py-1 rounded-full ${cat.tagBg}`}>
-                        {cat.questions} Qs
+                        {t('questions_count').replace('{{count}}', cat.questions)}
                       </span>
                     </div>
                     <p className="text-base text-slate-600 font-medium mb-3 leading-snug">{t(cat.descKey)}</p>
                     <div className="flex items-center justify-between flex-wrap gap-2">
-                      <span className="text-sm text-slate-500 font-semibold">📊 {cat.level}</span>
+                      <span className="text-sm text-slate-500 font-semibold">📊 {t(cat.levelKey)}</span>
                       <span className={`inline-flex items-center gap-1 font-bold text-base ${cat.iconClass}`}>
                         {t('start')} <ChevronRight className="w-5 h-5" aria-hidden="true" />
                       </span>

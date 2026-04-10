@@ -96,6 +96,23 @@ export default function SimulationScam() {
     }
   }, [messages, isTyping]);
 
+  // Handle global language changes for initial message
+  useEffect(() => {
+    if (stage === 'chat' && selectedScenario && messages.length > 0) {
+      setMessages(prev => {
+        const updated = [...prev];
+        // The first message (initial AI message) has id: 1
+        if (updated[0] && updated[0].id === 1) {
+          updated[0] = {
+            ...updated[0],
+            text: t(selectedScenario.initialMessageKey)
+          };
+        }
+        return updated;
+      });
+    }
+  }, [lang, stage, selectedScenario]); // stage and selectedScenario added to handle edge cases
+
   // Handle Voice
   const speak = (text) => {
     if (!voiceEnabled) return;
@@ -123,6 +140,7 @@ export default function SimulationScam() {
       id: 1,
       sender: 'ai',
       text: t(selectedScenario.initialMessageKey),
+      textKey: selectedScenario.initialMessageKey,
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     };
     setMessages([firstMsg]);
@@ -163,11 +181,11 @@ export default function SimulationScam() {
         setIsTyping(false);
         const fb = {
           type: 'danger',
-          msg: "Simulation Ended",
-          fact: "The AI detected that you shared sensitive information like an OTP or PIN. Scammers use this to steal money directly from your account."
+          msgKey: 'simulation_ended',
+          factKey: 'bank_otp_failure_fact' // I'll add this key soon or use default
         };
         setFeedback(fb);
-        speak(fb.msg);
+        speak(t(fb.msgKey));
         return;
       }
 
@@ -178,11 +196,11 @@ export default function SimulationScam() {
         setIsTyping(false);
         const fb = {
           type: 'success',
-          msg: "Simulation Complete",
-          fact: "Great job! The AI verified that you successfully identified the scam or refused to share private codes. This is exactly how you protect yourself."
+          msgKey: 'simulation_complete',
+          factKey: 'simulation_success_fact'
         };
         setFeedback(fb);
-        speak(fb.msg);
+        speak(t(fb.msgKey));
         return;
       }
 
@@ -405,7 +423,7 @@ export default function SimulationScam() {
           <div>
             <h3 className="font-black text-slate-900 text-xl leading-none mb-1">{t(selectedScenario.titleKey)}</h3>
             <span className="text-xs font-bold text-slate-400 p-1 bg-slate-100 rounded px-2">
-              Difficulty: {difficulty.toUpperCase()}
+              {t('difficulty_label')}: {t(difficulty)}
             </span>
           </div>
         </div>
@@ -440,7 +458,7 @@ export default function SimulationScam() {
               <div className={`p-4 rounded-3xl shadow-sm text-lg font-medium relative group
                 ${m.sender === 'user' ? 'bg-blue-700 text-white rounded-tr-none' : 'bg-white text-slate-800 rounded-tl-none'}
               `}>
-                {m.text}
+                {m.textKey ? t(m.textKey) : m.text}
                 <span className={`block text-[10px] mt-1 opacity-60 font-bold 
                   ${m.sender === 'user' ? 'text-right' : 'text-left'}
                 `}>
@@ -483,8 +501,8 @@ export default function SimulationScam() {
                 </div>
                 <div className="flex-1">
                   <h4 className="text-2xl font-black mb-2 flex items-center justify-between">
-                    <span>{isGameOver ? "Training Summary" : feedback?.msg}</span>
-                    {isGameOver && <span className="text-blue-700">Score: {score}/100</span>}
+                    <span>{isGameOver ? t('training_summary') : (feedback?.msgKey ? t(feedback.msgKey) : feedback?.msg)}</span>
+                    {isGameOver && <span className="text-blue-700">{t('score_label')}: {score}/100</span>}
                   </h4>
 
                   {isGameOver && (
@@ -496,12 +514,12 @@ export default function SimulationScam() {
                   )}
 
                   <p className="text-slate-700 font-medium text-lg mb-4 leading-relaxed">
-                    {feedback?.fact || "Scammers often use urgency and authority impersonation to pressure victims into revealing sensitive information like OTPs or passwords."}
+                    {feedback?.factKey ? t(feedback.factKey) : (feedback?.fact || t('safety_tip_default'))}
                   </p>
 
                   {/* Red Flags Helper */}
                   <div className="bg-white/50 p-4 rounded-xl border border-black/5">
-                    <p className="font-black text-sm uppercase tracking-wider text-slate-500 mb-3">Tactics Targeted in this Simulation:</p>
+                    <p className="font-black text-sm uppercase tracking-wider text-slate-500 mb-3">{t('tactics_targeted')}</p>
                     <div className="mb-4 bg-blue-100/50 p-3 rounded-lg border border-blue-200">
                       <p className="font-bold text-blue-900">{t(selectedScenario.tacticKey)}</p>
                     </div>
@@ -609,8 +627,8 @@ export default function SimulationScam() {
             setIsGameOver(true);
             setFeedback({
               type: 'info',
-              msg: t('simulation_ended') || "Simulation Ended",
-              fact: "You have manually ended the simulation. Use this chance to review the training information."
+              msgKey: 'simulation_ended',
+              factKey: 'simulation_ended_manual_fact'
             });
           }}
           className="text-slate-500 font-black hover:text-red-500 flex items-center gap-2 transition-all p-2 rounded-lg"

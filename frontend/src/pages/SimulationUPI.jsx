@@ -41,7 +41,7 @@ export default function SimulationUPI() {
         <button onClick={prev}
           className="flex items-center gap-2 text-blue-700 font-bold text-lg mb-6
                      hover:text-blue-900 focus:outline-none focus:ring-4 focus:ring-blue-400 rounded-xl p-1 min-h-[44px]">
-          <ArrowLeft className="w-6 h-6" /> Back
+          <ArrowLeft className="w-6 h-6" /> {t('back')}
         </button>
 
         {/* Header */}
@@ -52,7 +52,7 @@ export default function SimulationUPI() {
             </div>
             <div>
               <h1 className="text-xl font-black">{t('upi_title')}</h1>
-              <p className="text-teal-200 text-sm font-medium mt-0.5">This is a safe practice session</p>
+              <p className="text-teal-200 text-sm font-medium mt-0.5">{t('upi_safe_session')}</p>
             </div>
           </div>
         </div>
@@ -128,7 +128,7 @@ export default function SimulationUPI() {
 
             <button onClick={next} disabled={!amount || Number(amount) <= 0}
               className={`btn-primary ${(!amount || Number(amount) <= 0) ? 'opacity-40 cursor-not-allowed' : ''}`}>
-              Continue <ChevronRight className="w-5 h-5" aria-hidden="true" />
+              {t('btn_continue')} <ChevronRight className="w-5 h-5" aria-hidden="true" />
             </button>
           </div>
         )}
@@ -137,17 +137,17 @@ export default function SimulationUPI() {
         {step === 2 && (
           <div className="card p-8 slide-up text-center">
             <div className="text-7xl mb-5" aria-hidden="true">🛡️</div>
-            <h2 className="text-3xl font-black text-red-800 mb-4">Important Safety Rule</h2>
+            <h2 className="text-3xl font-black text-red-800 mb-4">{t('upi_important_rule')}</h2>
             <div className="bg-red-50 border-2 border-red-300 rounded-3xl p-6 mb-8 text-left">
               <p className="text-xl font-bold text-red-900 leading-relaxed">
                 🔴 {t('pin_warn')}
               </p>
               <p className="text-lg text-red-700 mt-3 font-medium leading-relaxed">
-                Banks or apps will <strong>never</strong> ask for your PIN on the phone or chat.
+                {t('upi_pin_note')}
               </p>
             </div>
             <button onClick={next} className="btn-primary">
-              ✅ I understand — Continue
+              {t('upi_understand')}
             </button>
           </div>
         )}
@@ -163,7 +163,7 @@ export default function SimulationUPI() {
 
             <h2 className="text-2xl font-black text-slate-900 mb-1 text-center">{t('enter_pin')}</h2>
             <p className="text-base text-slate-500 font-medium text-center mb-6 flex items-center justify-center gap-1.5">
-              <Lock className="w-4 h-4" aria-hidden="true" /> Safe practice mode
+              <Lock className="w-4 h-4" aria-hidden="true" /> {t('upi_safe_mode')}
             </p>
 
             {/* PIN dots */}
@@ -204,7 +204,7 @@ export default function SimulationUPI() {
 
             <button onClick={next} disabled={pin.length < 4}
               className={`btn-primary ${pin.length < 4 ? 'opacity-40 cursor-not-allowed' : 'bg-green-700 hover:bg-green-800'}`}>
-              <Lock className="w-5 h-5" aria-hidden="true" /> Confirm Payment
+              <Lock className="w-5 h-5" aria-hidden="true" /> {t('upi_confirm_payment')}
             </button>
           </div>
         )}
@@ -221,13 +221,13 @@ export default function SimulationUPI() {
               <p className="text-2xl font-bold text-slate-900">{contact?.name}</p>
             </div>
             <p className="text-lg text-green-700 font-semibold mb-8">
-              🎉 You completed the UPI practice. Well done!
+              {t('upi_well_done')}
             </p>
             <button onClick={reset} className="btn-primary bg-teal-700 hover:bg-teal-800">
-              Try Again
+              {t('btn_try_again')}
             </button>
             <button onClick={() => navigate('/simulations')} className="btn-secondary mt-4">
-              <ArrowLeft className="w-5 h-5" /> Back to Simulations
+              <ArrowLeft className="w-5 h-5" /> {t('back_to_simulations')}
             </button>
           </div>
         )}

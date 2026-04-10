@@ -20,7 +20,7 @@ export default function Simulations() {
           className="flex items-center gap-2 text-blue-700 font-bold text-lg mb-8 hover:text-blue-900 focus:outline-none focus:ring-4 focus:ring-blue-400 rounded-xl p-1 min-h-[44px]"
           aria-label="Go back to home"
         >
-          <ArrowLeft className="w-6 h-6" aria-hidden="true" /> Back to Home
+          <ArrowLeft className="w-6 h-6" aria-hidden="true" /> {t('back_to_home')}
         </button>
 
         <h1 className="text-4xl font-black text-slate-900 mb-2">{t('sim_hero_title')}</h1>
@@ -43,7 +43,7 @@ export default function Simulations() {
             </div>
             <div className="text-center">
               <p className="text-xl font-black text-slate-900 leading-tight">{t('mod1_title')}</p>
-              <p className="text-sm text-indigo-700 font-bold mt-1">▶  Start</p>
+              <p className="text-sm text-indigo-700 font-bold mt-1">▶  {t('btn_start')}</p>
             </div>
           </button>
 
@@ -61,7 +61,7 @@ export default function Simulations() {
             </div>
             <div className="text-center">
               <p className="text-xl font-black text-slate-900 leading-tight">{t('mod2_title')}</p>
-              <p className="text-sm text-teal-700 font-bold mt-1">▶  Start</p>
+              <p className="text-sm text-teal-700 font-bold mt-1">▶  {t('btn_start')}</p>
             </div>
           </button>
 
@@ -71,7 +71,7 @@ export default function Simulations() {
         <div className="mt-10 card p-5 bg-green-50 border-2 border-green-200 flex items-center gap-4 max-w-md">
           <span className="text-3xl" aria-hidden="true">🌟</span>
           <p className="text-lg font-semibold text-green-900">
-            You're doing great! Practice makes learning easy.
+            {t('encouragement_tip')}
           </p>
         </div>
       </main>

@@ -63,12 +63,12 @@ export default function SimulationPassword() {
         <main className="flex-1 flex flex-col items-center justify-center px-4 py-12 text-center">
           <div className="card p-10 max-w-sm w-full pop-in">
             <div className="text-7xl mb-6" aria-hidden="true">🎉</div>
-            <h2 className="text-3xl font-black text-green-800 mb-4">Excellent Work!</h2>
+            <h2 className="text-3xl font-black text-green-800 mb-4">{t('excellent_work')}</h2>
             <p className="text-xl text-slate-700 font-medium leading-relaxed mb-8">
               {t('success_pass')}
             </p>
             <button onClick={() => navigate('/simulations')} className="btn-primary">
-              <ArrowLeft className="w-5 h-5" /> Back to Simulations
+              <ArrowLeft className="w-5 h-5" /> {t('back_to_simulations') || 'Back to Simulations'}
             </button>
           </div>
         </main>
@@ -85,7 +85,7 @@ export default function SimulationPassword() {
         <button onClick={() => navigate('/simulations')}
           className="flex items-center gap-2 text-blue-700 font-bold text-lg mb-6
                      hover:text-blue-900 focus:outline-none focus:ring-4 focus:ring-blue-400 rounded-xl p-1 min-h-[44px]">
-          <ArrowLeft className="w-6 h-6" /> Back
+          <ArrowLeft className="w-6 h-6" /> {t('back')}
         </button>
 
         {/* Header card */}
@@ -96,7 +96,7 @@ export default function SimulationPassword() {
             </div>
             <div>
               <h1 className="text-2xl font-black leading-tight">{t('pass_title')}</h1>
-              <p className="text-indigo-200 text-base font-medium mt-1">Learn to create a strong password</p>
+              <p className="text-indigo-200 text-base font-medium mt-1">{t('learn_strong_pass')}</p>
             </div>
           </div>
         </div>
@@ -171,14 +171,14 @@ export default function SimulationPassword() {
 
             {active && !allValid && (
               <p className="text-center text-base text-blue-700 font-semibold animate-pulse">
-                💪 Keep going — you're almost there!
+                {t('keep_going')}
               </p>
             )}
           </div>
 
           {/* Right — Live checklist */}
           <div className="card p-6 flex flex-col gap-3">
-            <h2 className="text-xl font-black text-slate-800 mb-2">✅ Password Checklist</h2>
+            <h2 className="text-xl font-black text-slate-800 mb-2">{t('checklist_title')}</h2>
             <RuleRow valid={rules.length}  active={active} label={t('rule_min')}     suggestion={t('suggest_min')} />
             <RuleRow valid={rules.upper}   active={active} label={t('rule_upper')}   suggestion={t('suggest_upper')} />
             <RuleRow valid={rules.digit}   active={active} label={t('rule_digit')}   suggestion={t('suggest_digit')} />
@@ -186,8 +186,8 @@ export default function SimulationPassword() {
 
             {allValid && (
               <div className="mt-2 bg-green-50 border-2 border-green-400 rounded-2xl p-4 text-center pop-in">
-                <p className="text-2xl font-black text-green-700">🔒 Strong Password!</p>
-                <p className="text-base text-green-600 mt-1 font-medium">Your password is ready. Press Submit!</p>
+                <p className="text-2xl font-black text-green-700">{t('strong_pass_ready')}</p>
+                <p className="text-base text-green-600 mt-1 font-medium">{t('pass_ready_msg')}</p>
               </div>
             )}
           </div>

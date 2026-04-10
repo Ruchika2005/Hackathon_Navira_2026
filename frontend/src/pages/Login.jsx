@@ -17,8 +17,8 @@ export default function Login() {
 
   const validate = () => {
     const e = {};
-    if (!mobile.trim())  e.mobile   = 'Please enter your mobile number.';
-    if (!password)       e.password = 'Please enter your password.';
+    if (!mobile.trim())  e.mobile   = t('err_mobile_req');
+    if (!password)       e.password = t('err_pass_req');
     setErrors(e);
     return Object.keys(e).length === 0;
   };
@@ -38,7 +38,7 @@ export default function Login() {
       }
       navigate('/dashboard');
     } catch (err) {
-      setApiError(err.response?.data?.message || 'Login failed. Please check your details and try again.');
+      setApiError(err.response?.data?.message || t('login_err_title'));
     } finally {
       setIsLoading(false);
     }
@@ -56,7 +56,7 @@ export default function Login() {
           <span className="text-white text-4xl font-black">N</span>
         </div>
         <h1 className="text-4xl font-black text-blue-900 tracking-tight">Navira</h1>
-        <p className="text-lg text-slate-600 font-medium mt-1">Your digital learning companion</p>
+        <p className="text-lg text-slate-600 font-medium mt-1">{t('navira_sub') || 'Your digital learning companion'}</p>
       </div>
 
       {/* Login Card */}
@@ -70,7 +70,7 @@ export default function Login() {
           <div role="alert" className="flex items-start gap-3 bg-red-50 border-2 border-red-300 rounded-2xl p-4 mb-6">
             <span className="text-red-600 text-2xl mt-0.5" aria-hidden="true">⚠️</span>
             <div>
-              <p className="font-bold text-red-800 text-lg">Could not sign in</p>
+              <p className="font-bold text-red-800 text-lg">{t('login_err_title')}</p>
               <p className="text-red-700 text-base mt-1">{apiError}</p>
             </div>
           </div>
@@ -91,7 +91,7 @@ export default function Login() {
               value={mobile}
               onChange={(e) => { setMobile(e.target.value); setErrors(p => ({...p, mobile: ''})); }}
               className={`input-field ${errors.mobile ? 'border-red-400 focus:ring-red-300' : ''}`}
-              placeholder="e.g. 98765 43210"
+              placeholder={t('mobile_placeholder')}
               aria-describedby={errors.mobile ? 'mobile-error' : undefined}
               aria-invalid={!!errors.mobile}
             />
@@ -115,7 +115,7 @@ export default function Login() {
                 value={password}
                 onChange={(e) => { setPassword(e.target.value); setErrors(p => ({...p, password: ''})); }}
                 className={`input-field pr-16 ${errors.password ? 'border-red-400 focus:ring-red-300' : ''}`}
-                placeholder="Your secret password"
+                placeholder={t('pass_placeholder')}
                 aria-describedby={errors.password ? 'pass-error' : undefined}
                 aria-invalid={!!errors.password}
               />
@@ -143,7 +143,7 @@ export default function Login() {
             {isLoading ? (
               <>
                 <span className="animate-spin text-xl" aria-hidden="true">⏳</span>
-                Signing you in…
+                {t('signing_in')}
               </>
             ) : (
               <>
@@ -174,7 +174,7 @@ export default function Login() {
         onClick={() => alert('📞 Call us: 1800-XXX-XXXX\n\nWe are happy to help you sign in!')}
       >
         <HelpCircle className="w-5 h-5" />
-        <span>Help</span>
+        <span>{t('help')}</span>
       </button>
     </div>
   );

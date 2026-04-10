@@ -7,11 +7,11 @@ import LanguageSelector from '../components/LanguageSelector';
 import { ReactTransliterate } from 'react-transliterate';
 import 'react-transliterate/dist/index.css';
 
-const STEPS = ['Your Name', 'Contact', 'Password', 'Language'];
-
 export default function Signup() {
   const navigate  = useNavigate();
   const { t, setLang } = useLanguage();
+
+  const STEPS = [t('step_name'), t('step_contact'), t('step_password'), t('step_language')];
   const [step, setStep]   = useState(0); // 0-3
   const [form, setForm]   = useState({
     userName: '', mobileNumber: '', email: '',
@@ -30,16 +30,16 @@ export default function Signup() {
   /* ---- PER-STEP VALIDATION ---- */
   const validateStep = () => {
     const e = {};
-    if (step === 0 && !form.userName.trim()) e.userName = 'Please enter your full name.';
+    if (step === 0 && !form.userName.trim()) e.userName = t('err_name_req');
     if (step === 1) {
-      if (!form.mobileNumber.trim()) e.mobileNumber = 'Please enter your mobile number.';
-      else if (!/^[6-9]\d{9}$/.test(form.mobileNumber)) e.mobileNumber = 'Enter a valid 10-digit Indian mobile number.';
-      if (form.email && !/^\S+@\S+\.\S+$/.test(form.email)) e.email = 'Enter a valid email address or leave it blank.';
+      if (!form.mobileNumber.trim()) e.mobileNumber = t('err_mobile_req');
+      else if (!/^[6-9]\d{9}$/.test(form.mobileNumber)) e.mobileNumber = t('err_mobile_invalid');
+      if (form.email && !/^\S+@\S+\.\S+$/.test(form.email)) e.email = t('err_email_invalid');
     }
     if (step === 2) {
-      if (!form.password) e.password = 'Please create a password.';
-      else if (form.password.length < 6) e.password = 'Password must be at least 6 characters long.';
-      if (form.password !== form.confirmPassword) e.confirmPassword = 'Passwords do not match. Please try again.';
+      if (!form.password) e.password = t('err_pass_req');
+      else if (form.password.length < 6) e.password = t('err_pass_min');
+      if (form.password !== form.confirmPassword) e.confirmPassword = t('err_pass_mismatch');
     }
     setErrors(e);
     return Object.keys(e).length === 0;
@@ -72,12 +72,12 @@ export default function Signup() {
     <div key={0} className="slide-up space-y-6">
       <div className="text-center mb-6">
         <div className="text-5xl mb-3" aria-hidden="true">😊</div>
-        <h2 className="text-3xl font-black text-slate-900">What is your name?</h2>
-        <p className="text-lg text-slate-500 mt-2">We'll use this to greet you.</p>
+        <h2 className="text-3xl font-black text-slate-900">{t('name_greet')}</h2>
+        <p className="text-lg text-slate-500 mt-2">{t('name_sub')}</p>
       </div>
       <div>
         <label htmlFor="userName" className="input-label">
-          <User className="inline w-5 h-5 mr-2 text-blue-700" /> Your Full Name
+          <User className="inline w-5 h-5 mr-2 text-blue-700" /> {t('name_label')}
         </label>
         <ReactTransliterate
           id="userName"
@@ -97,11 +97,11 @@ export default function Signup() {
     <div key={1} className="slide-up space-y-6">
       <div className="text-center mb-6">
         <div className="text-5xl mb-3" aria-hidden="true">📱</div>
-        <h2 className="text-3xl font-black text-slate-900">Your Contact Details</h2>
-        <p className="text-lg text-slate-500 mt-2">Mobile is required. Email is optional.</p>
+        <h2 className="text-3xl font-black text-slate-900">{t('contact_title')}</h2>
+        <p className="text-lg text-slate-500 mt-2">{t('contact_sub')}</p>
       </div>
       <div>
-        <label htmlFor="mobile" className="input-label"><Phone className="inline w-5 h-5 mr-2 text-blue-700" /> Mobile Number</label>
+        <label htmlFor="mobile" className="input-label"><Phone className="inline w-5 h-5 mr-2 text-blue-700" /> {t('mobile_label')}</label>
         <input id="mobile" type="tel" inputMode="numeric"
           value={form.mobileNumber}
           onChange={e => setField('mobileNumber', e.target.value)}
@@ -111,8 +111,8 @@ export default function Signup() {
       </div>
       <div>
         <label htmlFor="email" className="input-label">
-          <Mail className="inline w-5 h-5 mr-2 text-blue-700" /> Email Address
-          <span className="ml-2 text-base text-slate-400 font-normal">(optional)</span>
+          <Mail className="inline w-5 h-5 mr-2 text-blue-700" /> {t('email_label')}
+          <span className="ml-2 text-base text-slate-400 font-normal">{t('email_optional')}</span>
         </label>
         <input id="email" type="email"
           value={form.email}
@@ -127,17 +127,17 @@ export default function Signup() {
     <div key={2} className="slide-up space-y-6">
       <div className="text-center mb-6">
         <div className="text-5xl mb-3" aria-hidden="true">🔒</div>
-        <h2 className="text-3xl font-black text-slate-900">Create a Password</h2>
-        <p className="text-lg text-slate-500 mt-2">Minimum 6 characters. Don't share it with anyone!</p>
+        <h2 className="text-3xl font-black text-slate-900">{t('pass_title')}</h2>
+        <p className="text-lg text-slate-500 mt-2">{t('pass_sub')}</p>
       </div>
       <div>
-        <label htmlFor="pass" className="input-label"><Lock className="inline w-5 h-5 mr-2 text-blue-700" /> Password</label>
+        <label htmlFor="pass" className="input-label"><Lock className="inline w-5 h-5 mr-2 text-blue-700" /> {t('pass_label')}</label>
         <div className="relative">
           <input id="pass" type={showPass ? 'text' : 'password'}
             value={form.password}
             onChange={e => setField('password', e.target.value)}
             className={`input-field pr-16 ${errors.password ? 'border-red-400' : ''}`}
-            placeholder="At least 6 characters" />
+            placeholder={t('pass_sub')} />
           <button type="button" onClick={() => setShowPass(s => !s)}
             className="absolute right-4 top-1/2 -translate-y-1/2 p-2 text-slate-500 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 rounded-lg min-h-[44px] min-w-[44px] flex items-center justify-center"
             aria-label={showPass ? 'Hide password' : 'Show password'}>
@@ -147,15 +147,15 @@ export default function Signup() {
         {errors.password && <p className="mt-2 text-red-700 font-semibold">⚠️ {errors.password}</p>}
       </div>
       <div>
-        <label htmlFor="confirmPass" className="input-label"><Lock className="inline w-5 h-5 mr-2 text-blue-700" /> Confirm Password</label>
+        <label htmlFor="confirmPass" className="input-label"><Lock className="inline w-5 h-5 mr-2 text-blue-700" /> {t('confirm_pass')}</label>
         <input id="confirmPass" type={showPass ? 'text' : 'password'}
           value={form.confirmPassword}
           onChange={e => setField('confirmPassword', e.target.value)}
           className={`input-field ${errors.confirmPassword ? 'border-red-400' : (form.confirmPassword && form.password === form.confirmPassword ? 'border-green-500' : '')}`}
-          placeholder="Type your password again" />
+          placeholder={t('confirm_pass_placeholder')} />
         {errors.confirmPassword && <p className="mt-2 text-red-700 font-semibold">⚠️ {errors.confirmPassword}</p>}
         {form.confirmPassword && form.password === form.confirmPassword && (
-          <p className="mt-2 text-green-700 font-bold flex items-center gap-1"><CheckCircle className="w-4 h-4" /> Passwords match!</p>
+          <p className="mt-2 text-green-700 font-bold flex items-center gap-1"><CheckCircle className="w-4 h-4" /> {t('pass_match_msg')}</p>
         )}
       </div>
     </div>,
@@ -164,8 +164,8 @@ export default function Signup() {
     <div key={3} className="slide-up space-y-6">
       <div className="text-center mb-6">
         <div className="text-5xl mb-3" aria-hidden="true">🌐</div>
-        <h2 className="text-3xl font-black text-slate-900">Choose Your Language</h2>
-        <p className="text-lg text-slate-500 mt-2">You can change this later from the menu.</p>
+        <h2 className="text-3xl font-black text-slate-900">{t('lang_title')}</h2>
+        <p className="text-lg text-slate-500 mt-2">{t('lang_sub')}</p>
       </div>
       {[
         { val: 'english', label: 'English', sub: 'English' },
@@ -212,7 +212,7 @@ export default function Signup() {
             <div key={i} className={`h-2 flex-1 rounded-full transition-all duration-300 ${i <= step ? 'bg-blue-600' : 'bg-slate-200'}`} />
           ))}
         </div>
-        <p className="text-sm text-slate-500 font-medium mt-2">Step {step + 1} of {STEPS.length}: <strong>{STEPS[step]}</strong></p>
+        <p className="text-sm text-slate-500 font-medium mt-2">{t('step_label').replace('{{step}}', step + 1).replace('{{total}}', STEPS.length)}: <strong>{STEPS[step]}</strong></p>
       </div>
 
       {/* Card */}
@@ -268,7 +268,7 @@ export default function Signup() {
       <button className="help-fab" aria-label="Get help"
         onClick={() => alert('📞 Call us: 1800-XXX-XXXX\n\nWe can help you create your account!')}>
         <HelpCircle className="w-5 h-5" />
-        <span>Help</span>
+        <span>{t('help')}</span>
       </button>
     </div>
   );

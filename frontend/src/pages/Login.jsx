@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Phone, Lock, Eye, EyeOff, ArrowRight, HelpCircle, CheckCircle } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
+import LanguageSelector from '../components/LanguageSelector';
 
 export default function Login() {
   const navigate = useNavigate();
+  const { t, setLang } = useLanguage();
   const [mobile, setMobile]       = useState('');
   const [password, setPassword]   = useState('');
   const [showPass, setShowPass]   = useState(false);
@@ -29,7 +32,10 @@ export default function Login() {
     try {
       const res = await axios.post('/api/auth/login', { mobileNumber: mobile, password });
       localStorage.setItem('token', res.data.token);
-      if (res.data.language) localStorage.setItem('language', res.data.language);
+      if (res.data.language) {
+        localStorage.setItem('language', res.data.language);
+        setLang(res.data.language);
+      }
       navigate('/dashboard');
     } catch (err) {
       setApiError(err.response?.data?.message || 'Login failed. Please check your details and try again.');
@@ -39,7 +45,10 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-blue-50 flex flex-col items-center justify-center px-4 py-8">
+    <div className="min-h-screen bg-blue-50 flex flex-col items-center justify-center px-4 py-8 relative">
+      <div className="absolute top-4 right-4">
+        <LanguageSelector />
+      </div>
 
       {/* App Brand */}
       <div className="text-center mb-8">
@@ -53,8 +62,8 @@ export default function Login() {
       {/* Login Card */}
       <div className="card w-full max-w-md p-8 slide-up">
 
-        <h2 className="text-3xl font-black text-slate-900 mb-2">Welcome back! 👋</h2>
-        <p className="text-lg text-slate-600 mb-8">Please enter your details to sign in.</p>
+        <h2 className="text-3xl font-black text-slate-900 mb-2">{t('login_title')}</h2>
+        <p className="text-lg text-slate-600 mb-8">{t('login_subtitle')}</p>
 
         {/* Error Banner */}
         {apiError && (
@@ -73,7 +82,7 @@ export default function Login() {
           <div>
             <label htmlFor="mobile" className="input-label">
               <Phone className="inline w-5 h-5 mr-2 text-blue-700" aria-hidden="true" />
-              Mobile Number
+              {t('mobile_label')}
             </label>
             <input
               id="mobile"
@@ -97,7 +106,7 @@ export default function Login() {
           <div>
             <label htmlFor="password" className="input-label">
               <Lock className="inline w-5 h-5 mr-2 text-blue-700" aria-hidden="true" />
-              Password
+              {t('pass_label')}
             </label>
             <div className="relative">
               <input
@@ -138,7 +147,7 @@ export default function Login() {
               </>
             ) : (
               <>
-                Sign In
+                {t('btn_signin')}
                 <ArrowRight className="w-6 h-6" aria-hidden="true" />
               </>
             )}
@@ -149,11 +158,11 @@ export default function Login() {
         <div className="my-8 border-t-2 border-slate-100" />
 
         <p className="text-center text-lg text-slate-600 font-medium mb-4">
-          Don't have an account yet?
+          {t('no_account')}
         </p>
         <Link to="/signup">
           <button className="btn-secondary">
-            ✨ Create a New Account
+            {t('create_new')}
           </button>
         </Link>
       </div>

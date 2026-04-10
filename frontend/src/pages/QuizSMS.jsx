@@ -241,7 +241,7 @@ export default function QuizSMS() {
           {selected !== null && (
             <div className={`card p-5 mb-5 pop-in border-2 ${q.options[selected].correct ? 'bg-green-50 border-green-300' : 'bg-amber-50 border-amber-300'}`}>
               <p className={`font-black text-lg mb-2 ${q.options[selected].correct ? 'text-green-800' : 'text-amber-800'}`}>
-                {q.options[selected].correct ? '✅ Correct!' : '❌ Not quite — here\'s why:'}
+                {q.options[selected].correct ? t('correct_msg') : t('incorrect_msg')}
               </p>
               <div className="space-y-1">
                 {q.feedback.lines.map((line, i) => (

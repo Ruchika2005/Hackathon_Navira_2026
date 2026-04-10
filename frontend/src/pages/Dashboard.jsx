@@ -17,15 +17,15 @@ export default function Dashboard() {
 
         {/* Welcome banner */}
         <div className="card p-6 sm:p-8 mb-8 bg-blue-700 text-white border-0 shadow-lg">
-          <p className="text-xl font-semibold mb-1 text-blue-200">Hello! 👋</p>
+          <p className="text-xl font-semibold mb-1 text-blue-200">{t('dashboard_hello')}</p>
           <h1 className="text-4xl font-black leading-tight mb-3">{t('welcome')}</h1>
           <p className="text-lg text-blue-100 font-medium">
-            Choose what you'd like to learn today. Take your time — there's no rush!
+            {t('dashboard_subtitle')}
           </p>
         </div>
 
         {/* Section heading */}
-        <h2 className="text-2xl font-black text-slate-800 mb-4 px-1">📚 What would you like to do?</h2>
+        <h2 className="text-2xl font-black text-slate-800 mb-4 px-1">{t('dashboard_heading')}</h2>
 
         {/* Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -89,9 +89,9 @@ export default function Dashboard() {
         <div className="mt-8 card p-5 bg-amber-50 border-2 border-amber-200 flex items-start gap-4">
           <span className="text-3xl" aria-hidden="true">💡</span>
           <div>
-            <p className="text-lg font-bold text-amber-900">Tip for today</p>
+            <p className="text-lg font-bold text-amber-900">{t('tip_title')}</p>
             <p className="text-base text-amber-800 mt-1 font-medium">
-              Always use a password that has letters, numbers, and symbols together. It keeps your account safe!
+              {t('tip_content')}
             </p>
           </div>
         </div>

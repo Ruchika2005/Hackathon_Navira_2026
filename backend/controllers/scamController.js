@@ -91,13 +91,13 @@ const evaluateMessage = async (userMessage) => {
  * --- SCAM GENERATION LOGIC ---
  */
 
-const callGemini = async (message, history, scenario, difficulty) => {
+const callGemini = async (message, history, scenario, difficulty, language) => {
     if (!process.env.GEMINI_API_KEY || process.env.GEMINI_API_KEY.includes('YOUR_')) throw new Error('Key missing');
 
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({
         model: "gemini-1.5-flash",
-        systemInstruction: `${SCAMMER_SYSTEM_PROMPT}\nCurrent Scenario: ${scenario}\nDifficulty: ${difficulty}`
+        systemInstruction: `${SCAMMER_SYSTEM_PROMPT}\nCurrent Scenario: ${scenario}\nDifficulty: ${difficulty}\nLanguage: You must respond exclusively in ${language || 'english'}.`
     });
 
     let formattedHistory = (history || []).map(msg => ({
@@ -112,11 +112,11 @@ const callGemini = async (message, history, scenario, difficulty) => {
     return result.response.text();
 };
 
-const callGroq = async (message, history, scenario, difficulty) => {
+const callGroq = async (message, history, scenario, difficulty, language) => {
     if (!process.env.GROQ_API_KEY || process.env.GROQ_API_KEY.includes('YOUR_')) throw new Error('Key missing');
 
     const messages = [
-        { role: "system", content: `${SCAMMER_SYSTEM_PROMPT}\nCurrent Scenario: ${scenario}\nDifficulty: ${difficulty}` },
+        { role: "system", content: `${SCAMMER_SYSTEM_PROMPT}\nCurrent Scenario: ${scenario}\nDifficulty: ${difficulty}\nLanguage: You must respond exclusively in ${language || 'english'}, regardless of the language the user speaks.` },
         ...history.map(msg => ({
             role: msg.sender === 'user' ? 'user' : 'assistant',
             content: msg.text
@@ -141,7 +141,7 @@ const callGroq = async (message, history, scenario, difficulty) => {
  */
 
 const scamChat = async (req, res) => {
-    const { message, history, scenario, difficulty, skipEvaluation } = req.body;
+    const { message, history, scenario, difficulty, skipEvaluation, language } = req.body;
     const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
     if (!message) return res.status(400).json({ message: "Message required" });
@@ -172,11 +172,11 @@ const scamChat = async (req, res) => {
         : message;
 
     try {
-        const response = await callGemini(effectiveMessage, history, scenario, difficulty);
+        const response = await callGemini(effectiveMessage, history, scenario, difficulty, language);
         return res.status(200).json({ evaluation: 'CONTINUE', text: response, time, provider: 'gemini' });
     } catch (geminiError) {
         try {
-            const response = await callGroq(effectiveMessage, history, scenario, difficulty);
+            const response = await callGroq(effectiveMessage, history, scenario, difficulty, language);
             return res.status(200).json({ evaluation: 'CONTINUE', text: response, time, provider: 'groq' });
         } catch (groqError) {
             const randomScam = PREDEFINED_SCAMS[Math.floor(Math.random() * PREDEFINED_SCAMS.length)];

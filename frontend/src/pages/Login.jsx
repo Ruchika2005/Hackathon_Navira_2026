@@ -7,7 +7,7 @@ import LanguageSelector from '../components/LanguageSelector';
 
 export default function Login() {
   const navigate = useNavigate();
-  const { t, setLang } = useLanguage();
+  const { t, lang, setLang } = useLanguage();
   const [mobile, setMobile]       = useState('');
   const [password, setPassword]   = useState('');
   const [showPass, setShowPass]   = useState(false);
@@ -30,7 +30,7 @@ export default function Login() {
 
     setIsLoading(true);
     try {
-      const res = await axios.post('/api/auth/login', { mobileNumber: mobile, password });
+      const res = await axios.post('/api/auth/login', { mobileNumber: mobile, password, language: lang });
       localStorage.setItem('token', res.data.token);
       if (res.data.language) {
         localStorage.setItem('language', res.data.language);

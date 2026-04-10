@@ -65,7 +65,7 @@ exports.signup = async (req, res) => {
 // LOGIN
 exports.login = async (req, res) => {
     try {
-        const { mobileNumber, password } = req.body;
+        const { mobileNumber, password, language } = req.body;
 
         // 1. Check user exists
         const user = await User.findOne({ mobileNumber });
@@ -79,14 +79,20 @@ exports.login = async (req, res) => {
             return res.status(400).json({ message: "Invalid credentials" });
         }
 
-        // 3. Generate token
+        // 3. Update language if provided
+        if (language && user.language !== language) {
+            user.language = language;
+            await user.save();
+        }
+
+        // 4. Generate token
         const token = jwt.sign(
             { id: user._id },
             process.env.JWT_SECRET,
             { expiresIn: "7d" }
         );
 
-        // 4. Send response
+        // 5. Send response
         res.json({
             message: "Login successful",
             token,

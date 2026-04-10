@@ -23,7 +23,7 @@ export default function SimulationUPI() {
   const [pin,     setPin]     = useState('');
 
   const next    = () => setStep(s => s + 1);
-  const prev    = () => step === 0 ? navigate('/simulations') : setStep(s => s - 1);
+  const prev    = () => step === 0 ? navigate('/dashboard') : setStep(s => s - 1);
 
   const onKey = (v) => {
     if (v === 'DEL') { setPin(p => p.slice(0, -1)); return; }
@@ -59,7 +59,7 @@ export default function SimulationUPI() {
         </div>
 
         {/* Progress dots */}
-        <div className="flex gap-2 mb-6" aria-label={`Step ${step + 1} of ${STEPS.length}`}>
+        <div className="flex gap-2 mb-6" aria-label={t('aria_step_of', { step: step + 1, total: STEPS.length })}>
           {STEPS.map((_, i) => (
             <div key={i} className={`h-2 flex-1 rounded-full transition-all ${i <= step ? 'bg-teal-600' : 'bg-slate-200'}`} />
           ))}
@@ -77,7 +77,7 @@ export default function SimulationUPI() {
                              bg-white hover:border-teal-400 hover:bg-teal-50
                              focus:outline-none focus:ring-4 focus:ring-teal-400
                              transition-all min-h-[72px] text-left"
-                  aria-label={`Pay to ${c.name}`}>
+                   aria-label={t('aria_pay_to', { name: c.name })}>
                   <div className={`${c.bg} w-14 h-14 rounded-full flex items-center justify-center text-white text-xl font-black shrink-0`}>
                     {c.initials}
                   </div>
@@ -116,7 +116,7 @@ export default function SimulationUPI() {
                 onChange={e => setAmount(e.target.value)}
                 className="bg-transparent text-4xl font-black w-full outline-none text-slate-900"
                 placeholder="0"
-                aria-label="Amount in rupees"
+                aria-label={t('aria_amt_rupees')}
                 autoFocus
               />
             </div>
@@ -176,7 +176,7 @@ export default function SimulationUPI() {
             </p>
 
             {/* PIN dots */}
-            <div className="flex justify-center gap-4 mb-8" aria-label={`${pin.length} digits entered`} aria-live="polite">
+            <div className="flex justify-center gap-4 mb-8" aria-label={t('aria_digits_entered', { count: pin.length })} aria-live="polite">
               {Array.from({ length: 6 }).map((_, i) => (
                 <div key={i}
                   className={`w-5 h-5 rounded-full border-2 transition-all duration-300 ${
@@ -191,7 +191,7 @@ export default function SimulationUPI() {
                   className="h-16 bg-white border-2 border-slate-200 rounded-2xl text-3xl font-black text-slate-800
                              hover:bg-teal-50 hover:border-teal-300 active:scale-95 transition-all
                              focus:outline-none focus:ring-4 focus:ring-teal-400 min-h-[64px]"
-                  aria-label={`Press ${n}`}>
+                  aria-label={t('aria_press_n', { n })}>
                   {n}
                 </button>
               ))}
@@ -201,12 +201,12 @@ export default function SimulationUPI() {
                 className="h-16 bg-white border-2 border-slate-200 rounded-2xl text-3xl font-black text-slate-800
                            hover:bg-teal-50 hover:border-teal-300 active:scale-95 transition-all
                            focus:outline-none focus:ring-4 focus:ring-teal-400 min-h-[64px]"
-                aria-label="Press 0">0</button>
+                aria-label={t('aria_press_n', { n: 0 })}>0</button>
               <button onClick={() => onKey('DEL')}
                 className="h-16 bg-slate-100 border-2 border-slate-200 rounded-2xl flex items-center justify-center
                            hover:bg-red-100 hover:border-red-300 active:scale-95 transition-all
                            focus:outline-none focus:ring-4 focus:ring-red-300 min-h-[64px]"
-                aria-label="Delete last digit">
+                aria-label={t('aria_del_last')}>
                 <X className="w-7 h-7 text-slate-600" />
               </button>
             </div>
@@ -235,7 +235,7 @@ export default function SimulationUPI() {
             <button onClick={reset} className="btn-primary bg-teal-700 hover:bg-teal-800">
               {t('btn_try_again')}
             </button>
-            <button onClick={() => navigate('/simulations')} className="btn-secondary mt-4">
+            <button onClick={() => navigate('/dashboard')} className="btn-secondary mt-4">
               <ArrowLeft className="w-5 h-5" /> {t('back_to_simulations')}
             </button>
           </div>

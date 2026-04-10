@@ -79,9 +79,9 @@ export default function SimulationScam() {
   const scrollRef = useRef(null);
 
   // States
-  const [stage, setStage] = useState('selector'); // 'selector', 'difficulty', 'chat'
+  const [stage, setStage] = useState('selector'); // 'selector', 'chat'
   const [selectedScenario, setSelectedScenario] = useState(null);
-  const [difficulty, setDifficulty] = useState('beginner');
+  const [difficulty] = useState('advanced');
   const [messages, setMessages] = useState([]);
   const [userInput, setUserInput] = useState('');
   const [score, setScore] = useState(100);
@@ -121,18 +121,13 @@ export default function SimulationScam() {
 
   const startSimulation = (scenario) => {
     setSelectedScenario(scenario);
-    setStage('difficulty');
-  };
-
-  const confirmDifficulty = (lvl) => {
-    setDifficulty(lvl);
     setStage('chat');
     // Initial scammer message
     const firstMsg = {
       id: 1,
       sender: 'ai',
-      text: t(selectedScenario.initialMessageKey),
-      textKey: selectedScenario.initialMessageKey,
+      text: t(scenario.initialMessageKey),
+      textKey: scenario.initialMessageKey,
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     };
     setMessages([firstMsg]);
@@ -174,7 +169,7 @@ export default function SimulationScam() {
         const fb = {
           type: 'danger',
           msgKey: 'simulation_ended',
-          factKey: 'bank_otp_failure_fact' // I'll add this key soon or use default
+          factKey: 'bank_otp_failure_fact'
         };
         setFeedback(fb);
         speak(t(fb.msgKey));
@@ -202,8 +197,8 @@ export default function SimulationScam() {
         setIsTyping(false);
         const fb = {
           type: 'info',
-          msg: "Simulation Complete",
-          fact: "The training session has ended after 8 turns. You successfully avoided falling for the scam by not sharing any codes!"
+          msgKey: 'simulation_complete',
+          factKey: 'turn_limit_fact'
         };
         setFeedback(fb);
         speak(fb.msg);
@@ -239,25 +234,25 @@ export default function SimulationScam() {
       newScore -= 20;
       setIsGameOver(true);
       fb = {
-        type: 'danger',
-        msg: "Simulation Ended",
-        fact: "You shared your OTP. This allows scammers to access your bank account. Legitimate services NEVER ask for these in chat."
+        type: 'error',
+        msgKey: 'incorrect_msg',
+        factKey: 'share_otp_failure_fact'
       };
     } else if (type === 'report') {
       newScore = Math.min(100, newScore + 15);
       setIsGameOver(true);
       fb = {
         type: 'success',
-        msg: "Excellent Response",
-        fact: "Reporting scams helps authorities stop fraud networks. You recognized the threat and took the best possible action."
+        msgKey: 'good_decision',
+        factKey: 'report_success_fact'
       };
     } else if (type === 'ignore') {
       newScore = Math.min(100, newScore + 10);
       setIsGameOver(true);
       fb = {
-        type: 'success',
-        msg: "Good Decision",
-        fact: "Ignoring suspicious messages is a safe choice. Scammers often rely on responses to continue their manipulation."
+        type: 'info',
+        msgKey: 'simulation_ended',
+        factKey: 'ignore_success_fact'
       };
     } else if (type === 'verify') {
       newScore = Math.min(100, newScore + 5);
@@ -272,9 +267,9 @@ export default function SimulationScam() {
       const updatedMessages = [...messages, verifyMsg];
       setMessages(updatedMessages);
       fb = {
-        type: 'info',
-        msg: "Caution Required",
-        fact: "Asking for verification shows critical thinking, but be careful! Scammers can provide fake IDs or documents too."
+        type: 'warning',
+        msgKey: 'caution_required',
+        factKey: 'verify_caution_fact'
       };
 
       // AI Escalates Pressure
@@ -307,7 +302,7 @@ export default function SimulationScam() {
 
     setScore(Math.max(0, newScore));
     setFeedback(fb);
-    if (fb) speak(fb.msg);
+    if (fb) speak(t(fb.msgKey));
     if (!isGameOver && type !== 'verify') {
       setTimeout(() => setFeedback(null), 8000);
     }
@@ -324,7 +319,7 @@ export default function SimulationScam() {
 
   const restartCurrent = () => {
     resetSimulation();
-    confirmDifficulty(difficulty);
+    startSimulation(selectedScenario);
   };
 
   const goToSelector = () => {
@@ -340,6 +335,52 @@ export default function SimulationScam() {
       <div className="text-center mb-10">
         <h2 className="text-3xl font-black text-slate-900 mb-3">{t('select_scenario')}</h2>
         <p className="text-lg text-slate-600 font-medium">Select a scenario to start practicing your defenses.</p>
+      </div>
+
+      {/* What, Why, How Section */}
+      <div className="card p-6 bg-white border-2 border-slate-100 mb-10 overflow-hidden max-w-5xl mx-auto shadow-sm">
+        <h2 className="text-2xl font-black text-slate-800 mb-6 flex items-center gap-3">
+          <span className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center text-xl">💡</span>
+          {t('scam_hero_title')}?
+        </h2>
+
+        <div className="space-y-2 divide-y divide-slate-100">
+          {/* What */}
+          <div className="flex items-start gap-4 pb-2 relative group">
+            <div className="absolute top-0 right-0">
+              <SpeakButton text={`${t('label_what')}. ${t('scam_what_is_it')}`} />
+            </div>
+            <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-2xl shrink-0">🤖</div>
+            <div className="pr-10">
+              <p className="font-black text-blue-900 text-lg mb-1">{t('label_what')}</p>
+              <p className="text-slate-600 font-medium leading-relaxed">{t('scam_what_is_it')}</p>
+            </div>
+          </div>
+
+          {/* Why */}
+          <div className="flex items-start gap-4 py-2 relative group">
+            <div className="absolute top-2 right-0">
+              <SpeakButton text={`${t('label_why')}. ${t('scam_why_do_it')}`} />
+            </div>
+            <div className="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center text-2xl shrink-0">💡</div>
+            <div className="pr-10">
+              <p className="font-black text-indigo-900 text-lg mb-1">{t('label_why')}</p>
+              <p className="text-slate-600 font-medium leading-relaxed">{t('scam_why_do_it')}</p>
+            </div>
+          </div>
+
+          {/* How */}
+          <div className="flex items-start gap-4 pt-2 relative group">
+            <div className="absolute top-2 right-0">
+              <SpeakButton text={`${t('label_how')}. ${t('scam_how_to_do_it')}`} />
+            </div>
+            <div className="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center text-2xl shrink-0">🗣️</div>
+            <div className="pr-10">
+              <p className="font-black text-teal-900 text-lg mb-1">{t('label_how')}</p>
+              <p className="text-slate-600 font-medium leading-relaxed">{t('scam_how_to_do_it')}</p>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className="grid md:grid-cols-2 gap-6 pb-20">
@@ -377,33 +418,6 @@ export default function SimulationScam() {
     </div>
   );
 
-  const renderDifficulty = () => (
-    <div className="max-w-xl mx-auto py-10 animate-in zoom-in-95 duration-300">
-      <div className="card p-10 text-center">
-        <h2 className="text-3xl font-black text-slate-900 mb-8">{t('difficulty')}</h2>
-
-        <div className="space-y-4">
-          {['beginner', 'intermediate', 'advanced'].map(lvl => (
-            <button
-              key={lvl}
-              onClick={() => confirmDifficulty(lvl)}
-              className="w-full btn-secondary py-5 text-xl capitalize flex items-center justify-between"
-            >
-              <span>{t(lvl)}</span>
-              <ChevronRight className="w-6 h-6" />
-            </button>
-          ))}
-        </div>
-
-        <button
-          onClick={() => setStage('selector')}
-          className="mt-10 text-slate-500 font-bold hover:text-slate-800 transition-colors"
-        >
-          {t('back')}
-        </button>
-      </div>
-    </div>
-  );
 
   const renderChat = () => (
     <div className="flex flex-col h-[75vh] max-w-4xl mx-auto">
@@ -420,9 +434,6 @@ export default function SimulationScam() {
           </div>
           <div>
             <h3 className="font-black text-slate-900 text-xl leading-none mb-1">{t(selectedScenario.titleKey)}</h3>
-            <span className="text-xs font-bold text-slate-400 p-1 bg-slate-100 rounded px-2">
-              {t('difficulty_label')}: {t(difficulty)}
-            </span>
           </div>
         </div>
         <div className="flex items-center gap-3">
@@ -510,9 +521,9 @@ export default function SimulationScam() {
 
                   {isGameOver && (
                     <p className="font-bold text-slate-600 mb-4 text-lg">
-                      {score >= 70 ? "Excellent job! You are highly resistant to these scam tactics." :
-                        score >= 40 ? "Good effort, but you should be more cautious with suspicious requests." :
-                          "Warning: You are vulnerable to these tactics. Please review the red flags."}
+                      {score >= 70 ? t('excellent_resistance') :
+                        score >= 40 ? t('good_effort_caution') :
+                          t('vulnerable_warning')}
                     </p>
                   )}
 
@@ -652,7 +663,7 @@ export default function SimulationScam() {
         {stage !== 'chat' && (
           <div className="mb-12 animate-in fade-in duration-700">
             <button
-              onClick={() => navigate('/simulations')}
+              onClick={() => navigate('/dashboard')}
               className="flex items-center gap-2 text-blue-700 font-bold text-lg mb-8 hover:text-blue-900 rounded-xl"
             >
               <ArrowLeft className="w-6 h-6" /> {t('back')}
@@ -673,7 +684,6 @@ export default function SimulationScam() {
 
         {/* --- Main Content Stage --- */}
         {stage === 'selector' && renderSelector()}
-        {stage === 'difficulty' && renderDifficulty()}
         {stage === 'chat' && renderChat()}
 
       </main>

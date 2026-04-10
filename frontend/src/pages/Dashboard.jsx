@@ -29,10 +29,10 @@ export default function Dashboard() {
             <button
               onClick={() => speak(t('platform_guide'))}
               className="inline-flex items-center gap-2 bg-white text-blue-700 font-bold px-4 py-2.5 rounded-xl hover:bg-blue-50 transition-colors shadow-sm focus:ring-4 focus:ring-white/30"
-              aria-label="Hear Platform Guide"
+              aria-label={t('btn_hear_guide')}
             >
               <PlayCircle className="w-5 h-5" />
-              Hear Platform Guide
+              {t('btn_hear_guide')}
             </button>
           </div>
         </div>
@@ -52,7 +52,7 @@ export default function Dashboard() {
             className="card p-6 text-left group hover:shadow-lg hover:border-indigo-200 border-2 border-transparent
                        focus:outline-none focus:ring-4 focus:ring-indigo-400 focus:ring-offset-2
                        transition-all duration-200 active:scale-[0.98] relative cursor-pointer"
-            aria-label="Go to Simulations — practice digital skills"
+            aria-label={t('aria_go_simulations')}
           >
             <div className="absolute top-4 right-4">
               <SpeakButton text={`${t('simulations')}. ${t('sim_desc')}`} />
@@ -76,7 +76,7 @@ export default function Dashboard() {
             className="card p-6 text-left group hover:shadow-lg hover:border-teal-200 border-2 border-transparent
                        focus:outline-none focus:ring-4 focus:ring-teal-400 focus:ring-offset-2
                        transition-all duration-200 active:scale-[0.98] cursor-pointer relative"
-            aria-label="Go to Quizzes — test your digital safety knowledge"
+            aria-label={t('aria_go_quizzes')}
           >
             <div className="absolute top-4 right-4">
               <SpeakButton text={`${t('quizzes')}. ${t('quiz_desc')}`} />
@@ -100,7 +100,7 @@ export default function Dashboard() {
             className="card p-6 text-left group hover:shadow-lg hover:border-amber-200 border-2 border-transparent
                        focus:outline-none focus:ring-4 focus:ring-amber-400 focus:ring-offset-2
                        transition-all duration-200 active:scale-[0.98] cursor-pointer relative"
-            aria-label="Practice detecting online scams"
+            aria-label={t('aria_go_scam')}
           >
             <div className="absolute top-4 right-4">
               <SpeakButton text={`${t('scam_dashboard_title')}. ${t('scam_dashboard_desc')}`} />

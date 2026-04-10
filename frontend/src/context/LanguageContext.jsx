@@ -31,6 +31,22 @@ const translations = {
     sim_desc: "Simulations allow you to practice important digital tasks safely, such as creating secure passwords.",
     quiz_desc: "Quizzes help you identify scam warning signs by answering simple questions.",
     platform_guide: "Navira is a platform designed to help you stay safe online. You can start by going to Simulations to practice basic skills, or take Quizzes to test your knowledge against scams.",
+    btn_hear_guide: "Hear Platform Guide",
+    aria_go_simulations: "Go to Simulations — practice digital skills",
+    aria_go_quizzes: "Go to Quizzes — test your digital safety knowledge",
+    aria_go_scam: "Practice detecting online scams",
+    aria_go_back_home: "Go back to home",
+    aria_pass_sim: "Password Security simulation",
+    aria_upi_sim: "UPI Payment simulation",
+    // ARIA / Accessibility
+    aria_show_pass: "Show password",
+    aria_hide_pass: "Hide password",
+    aria_step_of: "Step {{step}} of {{total}}",
+    aria_pay_to: "Pay to {{name}}",
+    aria_amt_rupees: "Amount in rupees",
+    aria_digits_entered: "{{count}} digits entered",
+    aria_press_n: "Press {{n}}",
+    aria_del_last: "Delete last digit",
     back: "Back",
     
     // Simulations Page
@@ -149,6 +165,15 @@ const translations = {
     simulation_success_fact: "Great job! The AI verified that you successfully identified the scam or refused to share private codes. This is exactly how you protect yourself.",
     bank_otp_failure_fact: "The AI detected that you shared sensitive information like an OTP or PIN. Scammers use this to steal money directly from your account.",
     simulation_ended_manual_fact: "You have manually ended the simulation. Use this chance to review the training information.",
+    simulation_ended: "Simulation Ended",
+    turn_limit_fact: "The training session has ended after 8 turns. You successfully avoided falling for the scam by not sharing any codes!",
+    share_otp_failure_fact: "You shared your OTP. This allows scammers to access your bank account. Legitimate services NEVER ask for these in chat.",
+    report_success_fact: "Reporting scams helps authorities stop fraud networks. You recognized the threat and took the best possible action.",
+    ignore_success_fact: "Ignoring suspicious messages is a safe choice. Scammers often rely on responses to continue their manipulation.",
+    verify_caution_fact: "Asking for verification shows critical thinking, but be careful! Scammers can provide fake IDs or documents too.",
+    excellent_resistance: "Excellent job! You are highly resistant to these scam tactics.",
+    good_effort_caution: "Good effort, but you should be more cautious with suspicious requests.",
+    vulnerable_warning: "Warning: You are vulnerable to these tactics. Please review the red flags.",
     correct_msg: "✅ Correct!",
     incorrect_msg: "❌ Not quite — here's why:",
     // Common
@@ -236,6 +261,20 @@ const translations = {
     friend_rf1: "Urgent money request",
     friend_rf2: "Claims emergency",
     friend_rf3: "Unusual communication method",
+
+    // Educational Descriptions
+    label_what: "What is it?",
+    label_why: "Why do it?",
+    label_how: "How to do it?",
+    quiz_what_is_it: "A 'Safety Game' where you test your knowledge about the internet.",
+    quiz_why_do_it: "To learn how to spot 'bad tricks' before they can reach you in real life.",
+    quiz_how_to_do_it: "Easy! Pick a topic, answer the questions, and read our helpful tips after each one.",
+    sim_what_is_it: "A safe 'Practice Playground' that looks like real apps but has no real risk.",
+    sim_why_do_it: "To build your confidence and learn the right steps without worrying about making mistakes.",
+    sim_how_to_do_it: "Simply follow the friendly guides on the screen as you use the apps.",
+    scam_what_is_it: "A safe chat with a smart computer that acts like a scammer.",
+    scam_why_do_it: "To see how scammers try to trick people so you can recognize them and say 'NO' if a real one ever calls you.",
+    scam_how_to_do_it: "Just talk to the person on the screen. Try to figure out if they are being honest or trying to trick you.",
   },
   hindi: {
     navira: "Navira",
@@ -264,22 +303,38 @@ const translations = {
     btn_next: "अगला",
     btn_back: "पीछे",
     btn_create: "🎉 खाता बनाएं",
-    sim_desc: "सिम्युलेशन आपको सुरक्षित तरीके से डिजिटल कार्यों (जैसे सुरक्षित पासवर्ड बनाना) का अभ्यास करने की अनुमति देते हैं।",
+    sim_desc: "सिम्युलेशन्स आपको सुरक्षित तरीके से डिजिटल कार्यों (जैसे सुरक्षित पासवर्ड बनाना) का अभ्यास करने की अनुमति देते हैं।",
     quiz_desc: "प्रश्नोत्तरी आपको आसान सवालों के जवाब देकर स्कैम के चेतावनी संकेतों को पहचानने में मदद करती है।",
-    platform_guide: "नवीरा एक ऐसा मंच है जो आपको ऑनलाइन सुरक्षित रहने में मदद करने के लिए बनाया गया है। आप बुनियादी कौशल का अभ्यास करने के लिए सिम्युलेशन पर जा सकते हैं, या घोटालों के खिलाफ अपने ज्ञान का परीक्षण करने के लिए प्रश्नोत्तरी ले सकते हैं।",
+    platform_guide: "नवीरा एक ऐसा मंच है जो आपको ऑनलाइन सुरक्षित रहने में मदद करने के लिए बनाया गया है। आप बुनियादी कौशल का अभ्यास करने के लिए सिम्युलेशन्स पर जा सकते हैं, या घोटालों के खिलाफ अपने ज्ञान का परीक्षण करने के लिए प्रश्नोत्तरी ले सकते हैं।",
+    btn_hear_guide: "प्लेटफ़ॉर्म गाइड सुनें",
+    aria_go_simulations: "सिम्युलेशन्स पर जाएं — डिजिटल कौशल का अभ्यास करें",
+    aria_go_quizzes: "क्विज़ पर जाएं — अपने डिजिटल सुरक्षा ज्ञान का परीक्षण करें",
+    aria_go_scam: "ऑनलाइन स्कैम को पहचानने का अभ्यास करें",
+    aria_go_back_home: "होम पर वापस जाएं",
+    aria_pass_sim: "पासवर्ड सुरक्षा सिम्युलेशन्स",
+    aria_upi_sim: "यूपीआई भुगतान सिम्युलेशन्स",
+    // ARIA / Accessibility
+    aria_show_pass: "पासवर्ड दिखाएं",
+    aria_hide_pass: "पासवर्ड छिपाएं",
+    aria_step_of: "चरण {{step}} का {{total}}",
+    aria_pay_to: "{{name}} को भुगतान करें",
+    aria_amt_rupees: "रुपये में राशि",
+    aria_digits_entered: "{{count}} अंक दर्ज किए गए",
+    aria_press_n: "{{n}} दबाएं",
+    aria_del_last: "अंतिम अंक हटाएं",
     back: "पीछे",
 
     // Simulations Page
-    sim_hero_title: "एक Simulation चुनें",
+    sim_hero_title: "एक सिम्युलेशन्स चुनें",
     sim_hero_desc: "सुरक्षित वातावरण में अभ्यास करके डिजिटल कौशल सीखें।",
     mod1_title: "सुरक्षित पासवर्ड सेटअप",
     mod1_desc: "ऐसे पासवर्ड बनाना सीखें जिन्हें हैकर्स अनुमान न लगा सकें।",
-    mod2_title: "यूपीआई भुगतान सिम्युलेशन",
+    mod2_title: "यूपीआई भुगतान सिम्युलेशन्स",
     mod2_desc: "सुरक्षित रूप से डिजिटल भुगतान भेजने का अभ्यास करें।",
-    start: "Simulation शुरू करें",
+    start: "सिम्युलेशन्स शुरू करें",
 
     // Password Simulation
-    pass_title: "Module 1: Secure Password Setup",
+    pass_title: "मॉड्यूल १: सुरक्षित पासवर्ड सेटअप",
     enter_pass: "पासवर्ड बनाएं",
     confirm_pass: "पासवर्ड की पुष्टि करें",
     show: "देखें",
@@ -302,7 +357,7 @@ const translations = {
     success_pass: "बहुत बढ़िया! आपने एक मजबूत और सुरक्षित पासवर्ड बनाया है।",
 
     // UPI Simulation
-    upi_title: "Module 2: UPI Payment Simulation",
+    upi_title: "मॉड्यूल २: यूपीआई भुगतान सिम्युलेशन्स",
     select_contact: "संपर्क चुनें",
     enter_amount: "राशि दर्ज करें",
     enter_pin: "UPI PIN दर्ज करें",
@@ -345,7 +400,7 @@ const translations = {
     scam_hero_desc: "सुरक्षित वातावरण में स्कैमर्स को जवाब देने का अभ्यास करें। धोखाधड़ी के प्रयासों की पहचान करना और अपनी व्यक्तिगत जानकारी की रक्षा करना सीखें।",
     mod3_title: "एआय स्कैम सिम्युलेटर",
     mod3_desc: "रीयल-टाइम चैट सिम्युलेशन्स में स्कैमर्स को पहचानें और उनका विरोध करें।",
-    begin_sim: "सिम्युलेशन शुरू करें",
+    begin_sim: "सिम्युलेशन्स शुरू करें",
     difficulty: "कठिनाई",
     beginner: "शुरुआती",
     intermediate: "मध्यम",
@@ -385,6 +440,15 @@ const translations = {
     simulation_success_fact: "शानदार काम! एआय ने सत्यापित किया कि आपने घोटाले को सफलतापूर्वक पहचान लिया या निजी कोड साझा करने से इनकार कर दिया। आप इसी तरह खुद को सुरक्षित रख सकते हैं।",
     bank_otp_failure_fact: "एआय ने पाया कि आपने ओटीपी या पिन जैसी संवेदनशील जानकारी साझा की है। स्कैमर्स इसका उपयोग आपके खाते से सीधे पैसे चुराने के लिए करते हैं।",
     simulation_ended_manual_fact: "आपने सिम्युलेशन को मैन्युअल रूप से समाप्त कर दिया है। प्रशिक्षण जानकारी की समीक्षा करने के लिए इस अवसर का उपयोग करें।",
+    simulation_ended: "सिम्युलेशन समाप्त",
+    turn_limit_fact: "8 टर्न के बाद प्रशिक्षण सत्र समाप्त हो गया है। आपने कोई कोड साझा न करके घोटाले में फंसने से सफलतापूर्वक परहेज किया!",
+    share_otp_failure_fact: "आपने अपना ओटीपी साझा किया। इससे स्कैमर्स को आपके बैंक खाते तक पहुँचने की अनुमति मिलती है। वैध सेवाएँ चैट में इन्हें कभी नहीं मांगती हैं।",
+    report_success_fact: "स्कैम की रिपोर्ट करने से अधिकारियों को धोखाधड़ी नेटवर्क को रोकने में मदद मिलती है। आपने खतरे को पहचाना और सर्वोत्तम संभव कार्रवाई की।",
+    ignore_success_fact: "संदिग्ध संदेशों को अनदेखा करना एक सुरक्षित विकल्प है। स्कैमर अक्सर अपनी हेरफेर जारी रखने के लिए प्रतिक्रियाओं पर भरोसा करते हैं।",
+    verify_caution_fact: "सत्यापन मांगना आलोचनात्मक सोच को दर्शाता है, लेकिन सावधान रहें! स्कैमर नकली आईडी या दस्तावेज भी प्रदान कर सकते हैं।",
+    excellent_resistance: "उत्कृष्ट काम! आप इन स्कैम युक्तियों के प्रति अत्यधिक प्रतिरोधी हैं।",
+    good_effort_caution: "अच्छा प्रयास, लेकिन आपको संदिग्ध अनुरोधों के प्रति अधिक सतर्क रहना चाहिए।",
+    vulnerable_warning: "चेतावनी: आप इन युक्तियों के प्रति संवेदनशील हैं। कृपया खतरे के संकेतों की समीक्षा करें।",
     correct_msg: "✅ सही!",
     incorrect_msg: "❌ बिल्कुल नहीं — यहाँ कारण बताया गया है:",
     // Common
@@ -473,6 +537,20 @@ const translations = {
     friend_rf1: "तत्काल पैसे का अनुरोध",
     friend_rf2: "आपातकाल का दावा",
     friend_rf3: "संचार का असामान्य तरीका",
+
+    // Educational Descriptions
+    label_what: "यह क्या है?",
+    label_why: "यह क्यों करें?",
+    label_how: "यह कैसे करें?",
+    quiz_what_is_it: "एक 'सुरक्षा खेल' जहाँ आप इंटरनेट के बारे में अपने ज्ञान का परीक्षण करते हैं।",
+    quiz_why_do_it: "वास्तविक जीवन में 'बुरी चालों' को आप तक पहुँचने से पहले ही पहचानना सीखने के लिए।",
+    quiz_how_to_do_it: "आसान! एक विषय चुनें, सवालों के जवाब दें, और हर एक के बाद हमारे उपयोगी सुझाव पढ़ें।",
+    sim_what_is_it: "एक सुरक्षित 'अभ्यास मैदान' जो असली ऐप्स जैसा दिखता है लेकिन इसमें कोई वास्तविक जोखिम नहीं है।",
+    sim_why_do_it: "अपना आत्मविश्वास बढ़ाने और गलतियों की चिंता किए बिना सही कदम सीखने के लिए।",
+    sim_how_to_do_it: "बस ऐप्स का उपयोग करते समय स्क्रीन पर दिए गए अनुकूल गाइड का पालन करें।",
+    scam_what_is_it: "एक स्मार्ट कंप्यूटर के साथ सुरक्षित चैट जो एक स्कैमर की तरह काम करता है।",
+    scam_why_do_it: "यह देखने के लिए कि स्कैमर लोगों को कैसे ठगने की कोशिश करते हैं, ताकि आप उन्हें पहचान सकें और असली स्कैमर को 'नहीं' कह सकें।",
+    scam_how_to_do_it: "बस स्क्रीन पर व्यक्ति से बात करें। यह जानने की कोशिश करें कि वे ईमानदार हैं या आपको ठगने की कोशिश कर रहे हैं।",
   },
   marathi: {
     navira: "Navira",
@@ -501,22 +579,38 @@ const translations = {
     btn_next: "पुढे",
     btn_back: "मागे",
     btn_create: "🎉 खाते तयार करा",
-    sim_desc: "सिम्युलेशन तुम्हाला सुरक्षित पासवर्ड तयार करण्यासारख्या महत्त्वाच्या डिजिटल कार्यांचा सराव करू देतात.",
+    sim_desc: "सिम्युलेशन्स तुम्हाला सुरक्षित पासवर्ड तयार करण्यासारख्या महत्त्वाच्या डिजिटल कार्यांचा सराव करू देतात.",
     quiz_desc: "क्विझ तुम्हाला साध्या प्रश्नांची उत्तरे देऊन फसवणुकीची चेतावणी चिन्हे ओळखण्यास मदत करतात.",
-    platform_guide: "नवीरा हे तुम्हाला ऑनलाइन सुरक्षित राहण्यास मदत करण्यासाठी तयार केलेले प्लॅटफॉर्म आहे. तुम्ही मूलभूत कौशल्यांचा सराव करण्यासाठी सिम्युलेशनवर जाऊन सुरुवात करू शकता, किंवा फसवणुकीविरुद्ध तुमच्या ज्ञानाची चाचणी घेण्यासाठी क्विझ घेऊ शकता.",
+    platform_guide: "नवीरा हे तुम्हाला ऑनलाइन सुरक्षित राहण्यास मदत करण्यासाठी तयार केलेले प्लॅटफॉर्म आहे. तुम्ही मूलभूत कौशल्यांचा सराव करण्यासाठी सिम्युलेशन्सवर जाऊन सुरुवात करू शकता, किंवा फसवणुकीविरुद्ध तुमच्या ज्ञानाची चाचणी घेण्यासाठी क्विझ घेऊ शकता.",
+    btn_hear_guide: "प्लॅटफॉर्म मार्गदर्शक ऐका",
+    aria_go_simulations: "सिम्युलेशन्सवर जा — डिजिटल कौशल्यांचा सराव करा",
+    aria_go_quizzes: "क्विझवर जा — तुमच्या डिजिटल सुरक्षा ज्ञानीची चाचणी घ्या",
+    aria_go_scam: "ऑनलाइन स्कॅम ओळखण्याचा सराव करा",
+    aria_go_back_home: "मुख्यपृष्ठावर परत जा",
+    aria_pass_sim: "पासवर्ड सुरक्षा सिम्युलेशन्स",
+    aria_upi_sim: "यूपीआई पेमेंट सिम्युलेशन्स",
+    // ARIA / Accessibility
+    aria_show_pass: "पासवर्ड दाखवा",
+    aria_hide_pass: "पासवर्ड लपवा",
+    aria_step_of: "पायरी {{step}} पैकी {{total}}",
+    aria_pay_to: "{{name}} ला पेमेंट करा",
+    aria_amt_rupees: "रुपयांमध्ये रक्कम",
+    aria_digits_entered: "{{count}} अंक टाकले",
+    aria_press_n: "{{n}} दाबा",
+    aria_del_last: "शेवटचा अंक काढा",
     back: "मागे",
 
     // Simulations Page
-    sim_hero_title: "एक Simulation निवडा",
+    sim_hero_title: "एक सिम्युलेशन्स निवडा",
     sim_hero_desc: "सुरक्षित वातावरणात सराव करून डिजिटल कौशल्ये शिका.",
-    mod1_title: "Secure Password Setup",
+    mod1_title: "सुरक्षित पासवर्ड सेटअप",
     mod1_desc: "हॅकर्स ओळखू शकणार नाहीत असे पासवर्ड तयार करायला शिका.",
-    mod2_title: "UPI Payment Simulation",
+    mod2_title: "यूपीआई पेमेंट सिम्युलेशन्स",
     mod2_desc: "सुरक्षितपणे डिजिटल पेमेंट पाठवण्याचा सराव करा.",
-    start: "Simulation सुरू करा",
+    start: "सिम्युलेशन्स सुरू करा",
 
     // Password Simulation
-    pass_title: "Module 1: Secure Password Setup",
+    pass_title: "मॉड्यूल १: सुरक्षित पासवर्ड सेटअप",
     enter_pass: "पासवर्ड तयार करा",
     confirm_pass: "पासवर्डची पुष्टी करा",
     show: "दाखवा",
@@ -539,7 +633,7 @@ const translations = {
     success_pass: "उत्कृष्ट! तुम्ही एक मजबूत आणि सुरक्षित पासवर्ड तयार केला आहे.",
 
     // UPI Simulation
-    upi_title: "Module 2: UPI Payment Simulation",
+    upi_title: "मॉड्यूल २: यूपीआई पेमेंट सिम्युलेशन्स",
     select_contact: "संपर्क निवडा",
     enter_amount: "रक्कम टाका",
     enter_pin: "UPI PIN टाका",
@@ -582,7 +676,7 @@ const translations = {
     scam_hero_desc: "सुरक्षित वातावरणात स्कॅमर्सना प्रतिसाद देण्याचा सराव करा. फसवणुकीचे प्रयत्न ओळखायला आणि आपल्या वैयक्तिक माहितीचे रक्षण करायला शिका.",
     mod3_title: "एआय स्कॅम सिम्युलेटर",
     mod3_desc: "रिअल-टाइम चॅट सिम्युलेशन्समध्ये स्कॅमर्स ओळखा आणि त्यांना विरोध करा.",
-    begin_sim: "सिम्युलेशन सुरू करा",
+    begin_sim: "सिम्युलेशन्स सुरू करा",
     difficulty: "काठिण्य पातळी",
     beginner: "नवशिक्या",
     intermediate: "मध्यम",
@@ -622,6 +716,15 @@ const translations = {
     simulation_success_fact: "उत्कृष्ट काम! एआयने पडताळले आहे की तुम्ही स्कॅम यशस्वीरित्या ओळखलात किंवा खाजगी कोड शेअर करण्यास नकार दिला. तुम्ही स्वतःचे रक्षण अशाच प्रकारे करू शकता.",
     bank_otp_failure_fact: "एआयने शोधून काढले आहे की तुम्ही ओटीपी किंवा पिन सारखी संवेदनशील माहिती शेअर केली आहे. स्कॅमर्स याचा वापर तुमच्या खात्यातून थेट पैसे चोरण्यासाठी करतात.",
     simulation_ended_manual_fact: "तुम्ही सिम्युलेशन मॅन्युअली समाप्त केले आहे. प्रशिक्षण माहितीचे पुनरावलोकन करण्यासाठी या संधीचा वापर करा.",
+    simulation_ended: "सिम्युलेशन समाप्त",
+    turn_limit_fact: "8 टर्न नंतर प्रशिक्षण सत्र संपले आहे. तुम्ही कोणताही कोड शेअर न करून फसवणुकीत अडकणे यशस्वीपणे टाळले!",
+    share_otp_failure_fact: "तुम्ही तुमचा ओटीपी शेअर केला. यामुळे स्कॅमर्सना तुमच्या बँक खात्यात प्रवेश मिळतो. अधिकृत सेवा चॅटमध्ये हे कधीही मागत नाहीत.",
+    report_success_fact: "स्कॅमची तक्रार केल्याने अधिकार्‍यांना फसवणूक नेटवर्क थांबवण्यास मदत होते. तुम्ही धोका ओळखलात आणि सर्वोत्तम संभाव्य कारवाई केली.",
+    ignore_success_fact: "संशयास्पद मेसेजकडे दुर्लक्ष करणे हा एक सुरक्षित पर्याय आहे. स्कॅमर्स अनेकदा त्यांची फसवणूक सुरू ठेवण्यासाठी प्रतिसादांवर अवलंबून असतात.",
+    verify_caution_fact: "पडताळणी विचारणे हे गंभीर विचारांचे लक्षण आहे, पण सावध रहा! स्कॅमर्स बनावट आयडी किंवा कागदपत्रे देखील देऊ शकतात.",
+    excellent_resistance: "उत्कृष्ट काम! तुम्ही या स्कॅम युक्तींना अत्यंत प्रतिकारक्षम आहात.",
+    good_effort_caution: "चांगले प्रयत्न, पण संशयास्पद विनंत्यांबाबत तुम्ही अधिक सावधगिरी बाळगली पाहिजे.",
+    vulnerable_warning: "चेतावणी: तुम्ही या युक्तींना बळी पडू शकता. कृपया धोक्याच्या संकेतांचे पुनरावलोकन करा.",
     correct_msg: "✅ बरोबर!",
     incorrect_msg: "❌ अगदी बरोबर नाही — याचे कारण असे आहे:",
     // Common
@@ -709,6 +812,20 @@ const translations = {
     friend_rf1: "तातडीने पैशांची मागणी",
     friend_rf2: "आणीबाणीचा दावा",
     friend_rf3: "संवादाचा असामान्य मार्ग",
+
+    // Educational Descriptions
+    label_what: "हे काय आहे?",
+    label_why: "हे का करायचे?",
+    label_how: "हे कसे करायचे?",
+    quiz_what_is_it: "एक 'सुरक्षा खेळ' जिथे तुम्ही इंटरनेटबद्दलच्या तुमच्या ज्ञानाची चाचणी घेता.",
+    quiz_why_do_it: "वास्तवात 'वाईट युक्त्या' तुमच्यापर्यंत पोहोचण्यापूर्वी त्या कशा ओळखायच्या हे शिकण्यासाठी.",
+    quiz_how_to_do_it: "सोपे आहे! एक विषय निवडा, प्रश्नांची उत्तरे द्या आणि प्रत्येकानंतर आमच्या उपयुक्त टिप्स वाचा.",
+    sim_what_is_it: "एक सुरक्षित 'सराव मैदान' जे खऱ्या अ‍ॅप्ससारखे दिसते पण जिथे कोणताही धोका नाही.",
+    sim_why_do_it: "तुमचा आत्मविश्वास वाढवण्यासाठी आणि चुकांची काळजी न करता योग्य पावले उचलण्यास शिकण्यासाठी.",
+    sim_how_to_do_it: "फक्त अ‍ॅप्स वापरताना स्क्रीनवरील मैत्रीपूर्ण मार्गदर्शकांचे अनुसरण करा.",
+    scam_what_is_it: "एका स्मार्ट कॉम्प्युटरसोबत सुरक्षित चॅट जी एखाद्या स्कॅमरसारखी वागते.",
+    scam_why_do_it: "स्कॅमर लोकांना कसे फसवण्याचा प्रयत्न करतात हे पाहण्यासाठी, जेणेकरून तुम्ही त्यांना ओळखू शकाल आणि खऱ्या स्कॅमरला 'नाही' म्हणू शकाल.",
+    scam_how_to_do_it: "फक्त स्क्रीनवरील व्यक्तीशी बोला. ते प्रामाणिक आहेत की तुम्हाला फसवण्याचा प्रयत्न करत आहेत हे शोधण्याचा प्रयत्न करा.",
   },
 };
 
@@ -721,8 +838,15 @@ export const LanguageProvider = ({ children }) => {
     localStorage.setItem('language', lang);
   }, [lang]);
 
-  const t = (key) => {
-    return translations[lang][key] || translations['english'][key] || key;
+  const t = (key, params = {}) => {
+    let str = translations[lang][key] || translations['english'][key] || key;
+    
+    // Replace {{param}} with values from params object
+    Object.keys(params).forEach(p => {
+      str = str.replace(`{{${p}}}`, params[p]);
+    });
+    
+    return str;
   };
 
   return (

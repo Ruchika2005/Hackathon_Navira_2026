@@ -71,8 +71,8 @@ export default function SimulationPassword() {
             <p className="text-xl text-slate-700 font-medium leading-relaxed mb-8">
               {t('success_pass')}
             </p>
-            <button onClick={() => navigate('/simulations')} className="btn-primary">
-              <ArrowLeft className="w-5 h-5" /> {t('back_to_simulations') || 'Back to Simulations'}
+            <button onClick={() => navigate('/dashboard')} className="btn-primary">
+              <ArrowLeft className="w-5 h-5" /> {t('back_to_simulations')}
             </button>
           </div>
         </main>
@@ -86,7 +86,7 @@ export default function SimulationPassword() {
 
       <main className="flex-1 w-full max-w-4xl mx-auto px-4 py-6 pb-20">
 
-        <button onClick={() => navigate('/simulations')}
+        <button onClick={() => navigate('/dashboard')}
           className="flex items-center gap-2 text-blue-700 font-bold text-lg mb-6
                      hover:text-blue-900 focus:outline-none focus:ring-4 focus:ring-blue-400 rounded-xl p-1 min-h-[44px]">
           <ArrowLeft className="w-6 h-6" /> {t('back')}
@@ -125,7 +125,7 @@ export default function SimulationPassword() {
                 <button type="button" onClick={() => setShowPass(s => !s)}
                   className="absolute right-4 top-1/2 -translate-y-1/2 p-2 text-slate-500 hover:text-blue-700
                              focus:outline-none focus:ring-2 focus:ring-blue-400 rounded-lg min-h-[44px] min-w-[44px] flex items-center justify-center"
-                  aria-label={showPass ? 'Hide password' : 'Show password'}>
+                  aria-label={showPass ? t('aria_hide_pass') : t('aria_show_pass')}>
                   {showPass ? <EyeOff className="w-6 h-6" /> : <Eye className="w-6 h-6" />}
                 </button>
               </div>

@@ -83,6 +83,52 @@ export default function Quizzes() {
           </p>
         </div>
 
+        {/* What, Why, How Section */}
+        <div className="card p-6 bg-white border-2 border-slate-100 mb-10 overflow-hidden">
+          <h2 className="text-2xl font-black text-slate-800 mb-6 flex items-center gap-3">
+            <span className="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center text-xl">💡</span>
+            {t('quiz_how_it_works_title')}
+          </h2>
+
+          <div className="space-y-2 divide-y divide-slate-100">
+            {/* What */}
+            <div className="flex items-start gap-4 pb-2 relative group">
+              <div className="absolute top-0 right-0">
+                <SpeakButton text={`${t('label_what')}. ${t('quiz_what_is_it')}`} />
+              </div>
+              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-2xl shrink-0">❓</div>
+              <div className="pr-10">
+                <p className="font-black text-blue-900 text-lg mb-1">{t('label_what')}</p>
+                <p className="text-slate-600 font-medium leading-relaxed">{t('quiz_what_is_it')}</p>
+              </div>
+            </div>
+
+            {/* Why */}
+            <div className="flex items-start gap-4 py-2 relative group">
+              <div className="absolute top-2 right-0">
+                <SpeakButton text={`${t('label_why')}. ${t('quiz_why_do_it')}`} />
+              </div>
+              <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center text-2xl shrink-0">🎯</div>
+              <div className="pr-10">
+                <p className="font-black text-green-900 text-lg mb-1">{t('label_why')}</p>
+                <p className="text-slate-600 font-medium leading-relaxed">{t('quiz_why_do_it')}</p>
+              </div>
+            </div>
+
+            {/* How */}
+            <div className="flex items-start gap-4 pt-2 relative group">
+              <div className="absolute top-2 right-0">
+                <SpeakButton text={`${t('label_how')}. ${t('quiz_how_to_do_it')}`} />
+              </div>
+              <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center text-2xl shrink-0">📝</div>
+              <div className="pr-10">
+                <p className="font-black text-purple-900 text-lg mb-1">{t('label_how')}</p>
+                <p className="text-slate-600 font-medium leading-relaxed">{t('quiz_how_to_do_it')}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <h2 className="text-2xl font-black text-slate-800 mb-5 px-1">📚 {t('quiz_topic_heading')}</h2>
 
         {/* Quiz Cards */}
@@ -128,16 +174,6 @@ export default function Quizzes() {
           })}
         </div>
 
-        {/* Tip */}
-        <div className="mt-8 card p-5 bg-amber-50 border-2 border-amber-200 flex items-start gap-4">
-          <span className="text-3xl" aria-hidden="true">💡</span>
-          <div>
-            <p className="text-lg font-bold text-amber-900">{t('quiz_how_it_works_title')}</p>
-            <p className="text-base text-amber-800 mt-1 font-medium">
-              {t('quiz_how_it_works_desc')}
-            </p>
-          </div>
-        </div>
       </main>
     </div>
   );

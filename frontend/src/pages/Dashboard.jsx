@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ShieldCheck, Smartphone, ChevronRight, BookOpen } from 'lucide-react';
+import { ShieldCheck, Smartphone, ChevronRight, BookOpen, ShieldAlert } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import Navbar from '../components/Navbar';
 
@@ -13,7 +13,7 @@ export default function Dashboard() {
     <div className="min-h-screen bg-blue-50 flex flex-col">
       <Navbar />
 
-      <main className="flex-1 w-full max-w-3xl mx-auto px-4 py-8" id="main-content">
+      <main className="flex-1 w-full max-w-5xl mx-auto px-4 py-8" id="main-content">
 
         {/* Welcome banner */}
         <div className="card p-6 sm:p-8 mb-8 bg-blue-700 text-white border-0 shadow-lg">
@@ -28,7 +28,7 @@ export default function Dashboard() {
         <h2 className="text-2xl font-black text-slate-800 mb-4 px-1">📚 What would you like to do?</h2>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
           {/* Simulations Card */}
           <button
@@ -63,6 +63,24 @@ export default function Dashboard() {
             <p className="text-lg text-slate-600 font-medium leading-snug mb-4">{t('quiz_desc')}</p>
             <span className="inline-flex items-center gap-2 text-teal-700 font-bold text-base">
               {t('start')} <ChevronRight className="w-5 h-5" aria-hidden="true" />
+            </span>
+          </button>
+
+          {/* AI Scam Simulator Card */}
+          <button
+            onClick={() => navigate('/simulations/scam')}
+            className="card p-6 text-left group hover:shadow-lg hover:border-amber-200 border-2 border-transparent
+                       focus:outline-none focus:ring-4 focus:ring-amber-400 focus:ring-offset-2
+                       transition-all duration-200 active:scale-[0.98] cursor-pointer"
+            aria-label="Practice detecting online scams"
+          >
+            <div className="w-16 h-16 bg-amber-100 rounded-2xl flex items-center justify-center mb-5 group-hover:bg-amber-200 transition-colors">
+              <ShieldAlert className="w-9 h-9 text-amber-700" aria-hidden="true" />
+            </div>
+            <h3 className="text-2xl font-black text-slate-900 mb-2">{t('scam_dashboard_title')}</h3>
+            <p className="text-lg text-slate-600 font-medium leading-snug mb-4">{t('scam_dashboard_desc')}</p>
+            <span className="inline-flex items-center gap-2 text-amber-700 font-bold text-base">
+              {t('start_training')} <ChevronRight className="w-5 h-5" aria-hidden="true" />
             </span>
           </button>
         </div>

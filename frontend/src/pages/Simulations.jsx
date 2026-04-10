@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ShieldCheck, Smartphone, ArrowLeft } from 'lucide-react';
+import { ShieldCheck, Smartphone, ArrowLeft, ShieldAlert } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import Navbar from '../components/Navbar';
 
@@ -64,6 +64,7 @@ export default function Simulations() {
               <p className="text-sm text-teal-700 font-bold mt-1">▶  Start</p>
             </div>
           </button>
+
         </div>
 
         {/* Encourage */}

@@ -1,11 +1,13 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Zap, HelpCircle, LogOut, Globe } from 'lucide-react';
+import { Zap, HelpCircle, LogOut, Globe, Volume2, VolumeX } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { useVoice } from '../context/VoiceContext';
 
 export default function Navbar() {
   const navigate = useNavigate();
   const { lang, setLang, t } = useLanguage();
+  const { voiceEnabled, toggleVoice } = useVoice();
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -30,8 +32,18 @@ export default function Navbar() {
             <span className="text-white text-xl font-extrabold tracking-wide">Navira</span>
           </Link>
 
-          {/* Right side controls */}
+        {/* Right side controls */}
           <div className="flex items-center gap-2 sm:gap-3">
+
+            {/* Voice toggle */}
+            <button
+              onClick={toggleVoice}
+              className={`flex items-center gap-1.5 px-2 py-1.5 rounded-xl transition-all focus:outline-none focus:ring-2 focus:ring-white/50
+                ${voiceEnabled ? 'bg-green-500/20 text-green-100 hover:bg-green-500/30' : 'bg-white/10 text-white/70 hover:bg-white/20'}`}
+              aria-label={voiceEnabled ? "Voice Assistance ON" : "Voice Assistance OFF"}
+            >
+              {voiceEnabled ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
+            </button>
 
             {/* Language selector */}
             <div className="flex items-center gap-1.5 bg-white/10 rounded-xl px-2 py-1.5">
@@ -39,12 +51,12 @@ export default function Navbar() {
               <select
                 value={lang}
                 onChange={(e) => setLang(e.target.value)}
-                className="bg-transparent text-white text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-white/50 rounded cursor-pointer"
+                className="bg-transparent text-white text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-white/50 rounded cursor-pointer [&>option]:text-slate-900"
                 aria-label="Select language"
               >
-                <option value="english" className="text-slate-900 bg-white">English</option>
-                <option value="hindi"   className="text-slate-900 bg-white">हिंदी</option>
-                <option value="marathi" className="text-slate-900 bg-white">मराठी</option>
+                <option value="english">English</option>
+                <option value="hindi">हिंदी</option>
+                <option value="marathi">मराठी</option>
               </select>
             </div>
 

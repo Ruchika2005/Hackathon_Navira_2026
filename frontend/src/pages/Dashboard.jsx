@@ -1,12 +1,15 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ShieldCheck, Smartphone, ChevronRight, BookOpen, ShieldAlert } from 'lucide-react';
+import { ShieldCheck, Smartphone, ChevronRight, BookOpen, ShieldAlert, PlayCircle } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { useVoice } from '../context/VoiceContext';
 import Navbar from '../components/Navbar';
+import SpeakButton from '../components/SpeakButton';
 
 export default function Dashboard() {
   const navigate  = useNavigate();
   const { t }     = useLanguage();
+  const { speak } = useVoice();
   const userName  = 'Friend'; // Could be stored in localStorage after login
 
   return (
@@ -16,12 +19,22 @@ export default function Dashboard() {
       <main className="flex-1 w-full max-w-5xl mx-auto px-4 py-8" id="main-content">
 
         {/* Welcome banner */}
-        <div className="card p-6 sm:p-8 mb-8 bg-blue-700 text-white border-0 shadow-lg">
-          <p className="text-xl font-semibold mb-1 text-blue-200">{t('dashboard_hello')}</p>
-          <h1 className="text-4xl font-black leading-tight mb-3">{t('welcome')}</h1>
-          <p className="text-lg text-blue-100 font-medium">
-            {t('dashboard_subtitle')}
-          </p>
+        <div className="card p-6 sm:p-8 mb-8 bg-blue-700 text-white border-0 shadow-lg relative overflow-hidden">
+          <div className="relative z-10">
+            <p className="text-xl font-semibold mb-1 text-blue-200">{t('dashboard_hello')}</p>
+            <h1 className="text-4xl font-black leading-tight mb-3">{t('welcome')}</h1>
+            <p className="text-lg text-blue-100 font-medium mb-6">
+              {t('dashboard_subtitle')}
+            </p>
+            <button
+              onClick={() => speak(t('platform_guide'))}
+              className="inline-flex items-center gap-2 bg-white text-blue-700 font-bold px-4 py-2.5 rounded-xl hover:bg-blue-50 transition-colors shadow-sm focus:ring-4 focus:ring-white/30"
+              aria-label="Hear Platform Guide"
+            >
+              <PlayCircle className="w-5 h-5" />
+              Hear Platform Guide
+            </button>
+          </div>
         </div>
 
         {/* Section heading */}
@@ -31,13 +44,19 @@ export default function Dashboard() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
           {/* Simulations Card */}
-          <button
+          <div
+            role="button"
+            tabIndex="0"
             onClick={() => navigate('/simulations')}
+            onKeyDown={(e) => { if (e.key === 'Enter') navigate('/simulations'); }}
             className="card p-6 text-left group hover:shadow-lg hover:border-indigo-200 border-2 border-transparent
                        focus:outline-none focus:ring-4 focus:ring-indigo-400 focus:ring-offset-2
-                       transition-all duration-200 active:scale-[0.98]"
+                       transition-all duration-200 active:scale-[0.98] relative cursor-pointer"
             aria-label="Go to Simulations — practice digital skills"
           >
+            <div className="absolute top-4 right-4">
+              <SpeakButton text={`${t('simulations')}. ${t('sim_desc')}`} />
+            </div>
             <div className="w-16 h-16 bg-indigo-100 rounded-2xl flex items-center justify-center mb-5 group-hover:bg-indigo-200 transition-colors">
               <ShieldCheck className="w-9 h-9 text-indigo-700" aria-hidden="true" />
             </div>
@@ -46,16 +65,22 @@ export default function Dashboard() {
             <span className="inline-flex items-center gap-2 text-indigo-700 font-bold text-base">
               {t('start')} <ChevronRight className="w-5 h-5" aria-hidden="true" />
             </span>
-          </button>
+          </div>
 
           {/* Quizzes Card */}
-          <button
+          <div
+            role="button"
+            tabIndex="0"
             onClick={() => navigate('/quizzes')}
+            onKeyDown={(e) => { if (e.key === 'Enter') navigate('/quizzes'); }}
             className="card p-6 text-left group hover:shadow-lg hover:border-teal-200 border-2 border-transparent
                        focus:outline-none focus:ring-4 focus:ring-teal-400 focus:ring-offset-2
-                       transition-all duration-200 active:scale-[0.98] cursor-pointer"
+                       transition-all duration-200 active:scale-[0.98] cursor-pointer relative"
             aria-label="Go to Quizzes — test your digital safety knowledge"
           >
+            <div className="absolute top-4 right-4">
+              <SpeakButton text={`${t('quizzes')}. ${t('quiz_desc')}`} />
+            </div>
             <div className="w-16 h-16 bg-teal-100 rounded-2xl flex items-center justify-center mb-5 group-hover:bg-teal-200 transition-colors">
               <BookOpen className="w-9 h-9 text-teal-700" aria-hidden="true" />
             </div>
@@ -64,16 +89,22 @@ export default function Dashboard() {
             <span className="inline-flex items-center gap-2 text-teal-700 font-bold text-base">
               {t('start')} <ChevronRight className="w-5 h-5" aria-hidden="true" />
             </span>
-          </button>
+          </div>
 
           {/* AI Scam Simulator Card */}
-          <button
+          <div
+            role="button"
+            tabIndex="0"
             onClick={() => navigate('/simulations/scam')}
+            onKeyDown={(e) => { if (e.key === 'Enter') navigate('/simulations/scam'); }}
             className="card p-6 text-left group hover:shadow-lg hover:border-amber-200 border-2 border-transparent
                        focus:outline-none focus:ring-4 focus:ring-amber-400 focus:ring-offset-2
-                       transition-all duration-200 active:scale-[0.98] cursor-pointer"
+                       transition-all duration-200 active:scale-[0.98] cursor-pointer relative"
             aria-label="Practice detecting online scams"
           >
+            <div className="absolute top-4 right-4">
+              <SpeakButton text={`${t('scam_dashboard_title')}. ${t('scam_dashboard_desc')}`} />
+            </div>
             <div className="w-16 h-16 bg-amber-100 rounded-2xl flex items-center justify-center mb-5 group-hover:bg-amber-200 transition-colors">
               <ShieldAlert className="w-9 h-9 text-amber-700" aria-hidden="true" />
             </div>
@@ -82,7 +113,7 @@ export default function Dashboard() {
             <span className="inline-flex items-center gap-2 text-amber-700 font-bold text-base">
               {t('start_training')} <ChevronRight className="w-5 h-5" aria-hidden="true" />
             </span>
-          </button>
+          </div>
         </div>
 
         {/* Tip banner */}

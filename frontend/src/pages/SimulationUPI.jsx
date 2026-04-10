@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, CheckCircle, ShieldAlert, Lock, ChevronRight, X, Smartphone } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import Navbar from '../components/Navbar';
+import SpeakButton from '../components/SpeakButton';
 
 const CONTACTS = [
   { id: 1, name: 'Rahul Sharma',  phone: '98765 43210', initials: 'RS', bg: 'bg-blue-500' },
@@ -121,9 +122,14 @@ export default function SimulationUPI() {
             </div>
 
             {/* Warning inline */}
-            <div className="flex items-start gap-3 bg-amber-50 border-2 border-amber-200 rounded-2xl p-4 mb-6">
-              <span className="text-2xl shrink-0" aria-hidden="true">⚠️</span>
-              <p className="text-base font-semibold text-amber-900">{t('receiver_warn')}</p>
+            <div className="flex items-start gap-3 bg-amber-50 border-2 border-amber-200 rounded-2xl p-4 mb-6 relative">
+              <span className="text-2xl shrink-0 mt-0.5" aria-hidden="true">⚠️</span>
+              <div className="flex-1 pr-10">
+                <p className="text-base font-semibold text-amber-900">{t('receiver_warn')}</p>
+              </div>
+              <div className="absolute top-3 right-3">
+                <SpeakButton text={t('receiver_warn')} />
+              </div>
             </div>
 
             <button onClick={next} disabled={!amount || Number(amount) <= 0}
@@ -138,8 +144,11 @@ export default function SimulationUPI() {
           <div className="card p-8 slide-up text-center">
             <div className="text-7xl mb-5" aria-hidden="true">🛡️</div>
             <h2 className="text-3xl font-black text-red-800 mb-4">{t('upi_important_rule')}</h2>
-            <div className="bg-red-50 border-2 border-red-300 rounded-3xl p-6 mb-8 text-left">
-              <p className="text-xl font-bold text-red-900 leading-relaxed">
+            <div className="bg-red-50 border-2 border-red-300 rounded-3xl p-6 mb-8 text-left relative">
+              <div className="absolute top-4 right-4">
+                <SpeakButton text={`${t('pin_warn')}. ${t('upi_pin_note')}`} />
+              </div>
+              <p className="text-xl font-bold text-red-900 leading-relaxed pr-8">
                 🔴 {t('pin_warn')}
               </p>
               <p className="text-lg text-red-700 mt-3 font-medium leading-relaxed">

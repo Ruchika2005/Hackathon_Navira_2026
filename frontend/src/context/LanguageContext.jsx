@@ -28,8 +28,9 @@ const translations = {
     btn_next: "Next",
     btn_back: "Back",
     btn_create: "🎉 Create Account",
-    sim_desc: "Engage with state-of-the-art interactive 3D simulations.",
-    quiz_desc: "Test your knowledge with challenging assessments.",
+    sim_desc: "Simulations allow you to practice important digital tasks safely, such as creating secure passwords.",
+    quiz_desc: "Quizzes help you identify scam warning signs by answering simple questions.",
+    platform_guide: "Navira is a platform designed to help you stay safe online. You can start by going to Simulations to practice basic skills, or take Quizzes to test your knowledge against scams.",
     back: "Back",
     
     // Simulations Page
@@ -135,7 +136,7 @@ const translations = {
     restart_training: "Restart Training",
     new_scenario: "New Scenario",
     scam_dashboard_title: "AI Scam Simulator",
-    scam_dashboard_desc: "Practice detecting online scams in a safe AI-driven conversation environment.",
+    scam_dashboard_desc: "Interact with an AI scammer to test your scam awareness and practice how to respond.",
     start_training: "Start Training",
     sim_over: "Simulation Over",
     type_response: "Type your response safely...",
@@ -263,8 +264,9 @@ const translations = {
     btn_next: "अगला",
     btn_back: "पीछे",
     btn_create: "🎉 खाता बनाएं",
-    sim_desc: "अत्याधुनिक इंटरैक्टिव 3D simulations के साथ जुड़ें।",
-    quiz_desc: "चुनौतीपूर्ण assessments के साथ अपने ज्ञान का परीक्षण करें।",
+    sim_desc: "सिम्युलेशन आपको सुरक्षित तरीके से डिजिटल कार्यों (जैसे सुरक्षित पासवर्ड बनाना) का अभ्यास करने की अनुमति देते हैं।",
+    quiz_desc: "प्रश्नोत्तरी आपको आसान सवालों के जवाब देकर स्कैम के चेतावनी संकेतों को पहचानने में मदद करती है।",
+    platform_guide: "नवीरा एक ऐसा मंच है जो आपको ऑनलाइन सुरक्षित रहने में मदद करने के लिए बनाया गया है। आप बुनियादी कौशल का अभ्यास करने के लिए सिम्युलेशन पर जा सकते हैं, या घोटालों के खिलाफ अपने ज्ञान का परीक्षण करने के लिए प्रश्नोत्तरी ले सकते हैं।",
     back: "पीछे",
 
     // Simulations Page
@@ -370,7 +372,7 @@ const translations = {
     restart_training: "प्रशिक्षण पुनरारंभ करें",
     new_scenario: "नया परिदृश्य",
     scam_dashboard_title: "एआय स्कैम सिम्युलेटर",
-    scam_dashboard_desc: "सुरक्षित एआय-आधारित बातचीत के माहौल में ऑनलाइन घोटालों का पता लगाने का अभ्यास करें।",
+    scam_dashboard_desc: "अपनी जागरूकता का परीक्षण करने और प्रतिक्रिया देने का अभ्यास करने के लिए एआई स्कैमर के साथ बातचीत करें।",
     start_training: "प्रशिक्षण शुरू करें",
     sim_over: "सिम्युलेशन समाप्त",
     type_response: "अपना उत्तर सुरक्षित रूप से टाइप करें...",
@@ -499,8 +501,9 @@ const translations = {
     btn_next: "पुढे",
     btn_back: "मागे",
     btn_create: "🎉 खाते तयार करा",
-    sim_desc: "अत्याधुनिक संवादात्मक 3D simulations सह व्यस्त रहा.",
-    quiz_desc: "आव्हानात्मक assessments द्वारे आपल्या ज्ञानाची चाचणी घ्या.",
+    sim_desc: "सिम्युलेशन तुम्हाला सुरक्षित पासवर्ड तयार करण्यासारख्या महत्त्वाच्या डिजिटल कार्यांचा सराव करू देतात.",
+    quiz_desc: "क्विझ तुम्हाला साध्या प्रश्नांची उत्तरे देऊन फसवणुकीची चेतावणी चिन्हे ओळखण्यास मदत करतात.",
+    platform_guide: "नवीरा हे तुम्हाला ऑनलाइन सुरक्षित राहण्यास मदत करण्यासाठी तयार केलेले प्लॅटफॉर्म आहे. तुम्ही मूलभूत कौशल्यांचा सराव करण्यासाठी सिम्युलेशनवर जाऊन सुरुवात करू शकता, किंवा फसवणुकीविरुद्ध तुमच्या ज्ञानाची चाचणी घेण्यासाठी क्विझ घेऊ शकता.",
     back: "मागे",
 
     // Simulations Page
@@ -606,7 +609,7 @@ const translations = {
     restart_training: "प्रशिक्षण पुन्हा सुरू करा",
     new_scenario: "नवीन परिस्थिती",
     scam_dashboard_title: "एआय स्कॅम सिम्युलेटर",
-    scam_dashboard_desc: "सुरक्षित एआय-आधारित संभाषणाच्या वातावरणात ऑनलाइन घोटाळे ओळखण्याचा सराव करा.",
+    scam_dashboard_desc: "तुमच्या जागरूकतेची चाचणी घेण्यासाठी आणि कसा प्रतिसाद द्यायचा याचा सराव करण्यासाठी एआय स्कॅमरशी संवाद साधा.",
     start_training: "प्रशिक्षण सुरू करा",
     sim_over: "सिम्युलेशन समाप्त",
     type_response: "तुमचे उत्तर सुरक्षितपणे टाईप करा...",

@@ -22,7 +22,9 @@ import {
 } from 'lucide-react';
 import axios from 'axios';
 import { useLanguage } from '../context/LanguageContext';
+import { useVoice } from '../context/VoiceContext';
 import Navbar from '../components/Navbar';
+import SpeakButton from '../components/SpeakButton';
 import { ReactTransliterate } from 'react-transliterate';
 import 'react-transliterate/dist/index.css';
 
@@ -84,7 +86,7 @@ export default function SimulationScam() {
   const [userInput, setUserInput] = useState('');
   const [score, setScore] = useState(100);
   const [feedback, setFeedback] = useState(null);
-  const [voiceEnabled, setVoiceEnabled] = useState(false);
+  // voiceEnabled is now managed by VoiceContext
   const [isTyping, setIsTyping] = useState(false);
   const [turnCount, setTurnCount] = useState(0);
   const [isGameOver, setIsGameOver] = useState(false);
@@ -113,17 +115,7 @@ export default function SimulationScam() {
     }
   }, [lang, stage, selectedScenario]); // stage and selectedScenario added to handle edge cases
 
-  // Handle Voice
-  const speak = (text) => {
-    if (!voiceEnabled) return;
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
-    // Find a nice voice
-    const voices = window.speechSynthesis.getVoices();
-    utterance.voice = voices.find(v => v.lang.includes('en-IN')) || voices[0];
-    utterance.rate = 0.9;
-    window.speechSynthesis.speak(utterance);
-  };
+  const { speak, voiceEnabled, toggleVoice } = useVoice();
 
   // --- LOGIC HELPERS ---
 
@@ -354,11 +346,17 @@ export default function SimulationScam() {
         {SCENARIOS.map((s) => {
           const IconComp = s.icon;
           return (
-            <button
+            <div
               key={s.id}
+              role="button"
+              tabIndex="0"
               onClick={() => startSimulation(s)}
-              className="card flex flex-col items-start p-8 group border-2 border-transparent hover:border-blue-400 hover:shadow-2xl transition-all text-left"
+              onKeyDown={(e) => e.key === 'Enter' && startSimulation(s)}
+              className="card flex flex-col items-start p-8 group border-2 border-transparent hover:border-blue-400 hover:shadow-2xl transition-all text-left relative cursor-pointer"
             >
+              <div className="absolute top-6 right-6 z-10">
+                <SpeakButton text={`${t(s.titleKey)}. ${t(s.descKey)}`} />
+              </div>
               <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform
                 ${s.color === 'blue' ? 'bg-blue-100 text-blue-700' : ''}
                 ${s.color === 'yellow' ? 'bg-yellow-100 text-yellow-700' : ''}
@@ -367,12 +365,12 @@ export default function SimulationScam() {
               `}>
                 <IconComp className="w-9 h-9" />
               </div>
-              <h3 className="text-2xl font-black text-slate-900 mb-2">{t(s.titleKey)}</h3>
+              <h3 className="text-2xl font-black text-slate-900 mb-2 pr-10">{t(s.titleKey)}</h3>
               <p className="text-slate-600 font-medium mb-6 flex-1 text-lg leading-relaxed">{t(s.descKey)}</p>
               <span className="inline-flex items-center gap-2 text-blue-700 font-bold text-lg group-hover:gap-4 transition-all">
                 {t('begin_sim')} <ChevronRight className="w-5 h-5" />
               </span>
-            </button>
+            </div>
           );
         })}
       </div>
@@ -429,7 +427,7 @@ export default function SimulationScam() {
         </div>
         <div className="flex items-center gap-3">
           <button
-            onClick={() => setVoiceEnabled(!voiceEnabled)}
+            onClick={toggleVoice}
             className={`p-3 rounded-xl transition-all ${voiceEnabled ? 'bg-blue-600 text-white shadow-lg' : 'bg-slate-100 text-slate-500'}`}
             title="Toggle Voice"
           >
@@ -455,15 +453,20 @@ export default function SimulationScam() {
               `}>
                 {m.sender === 'user' ? <User className="w-6 h-6" /> : <Bot className="w-6 h-6" />}
               </div>
-              <div className={`p-4 rounded-3xl shadow-sm text-lg font-medium relative group
+              <div className={`p-4 rounded-3xl shadow-sm text-lg font-medium relative group flex items-start gap-3
                 ${m.sender === 'user' ? 'bg-blue-700 text-white rounded-tr-none' : 'bg-white text-slate-800 rounded-tl-none'}
               `}>
-                {m.textKey ? t(m.textKey) : m.text}
-                <span className={`block text-[10px] mt-1 opacity-60 font-bold 
-                  ${m.sender === 'user' ? 'text-right' : 'text-left'}
-                `}>
-                  {m.time}
-                </span>
+                <div className="flex-1">
+                  {m.textKey ? t(m.textKey) : m.text}
+                  <span className={`block text-[10px] mt-1 opacity-60 font-bold 
+                    ${m.sender === 'user' ? 'text-right' : 'text-left'}
+                  `}>
+                    {m.time}
+                  </span>
+                </div>
+                {m.sender === 'ai' && (
+                  <SpeakButton text={m.textKey ? t(m.textKey) : m.text} />
+                )}
               </div>
             </div>
           </div>

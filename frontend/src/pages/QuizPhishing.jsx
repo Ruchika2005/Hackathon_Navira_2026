@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, CheckCircle, XCircle, AlertTriangle, RefreshCw } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import { useLanguage } from '../context/LanguageContext';
+import SpeakButton from '../components/SpeakButton';
 import { quizData } from '../data/quizData';
 
 /* ─── Helpers ───────────────────────────────────────────── */
@@ -46,11 +47,14 @@ function EmailCard({ email, answered }) {
       style={{ fontFamily: 'monospace' }}
     >
       {/* Email header bar */}
-      <div className="bg-slate-100 px-4 py-2 flex gap-2 items-center border-b border-slate-200">
+      <div className="bg-slate-100 px-4 py-2 flex gap-2 items-center border-b border-slate-200 relative">
         <span className="w-3 h-3 rounded-full bg-red-400 inline-block" />
         <span className="w-3 h-3 rounded-full bg-yellow-400 inline-block" />
         <span className="w-3 h-3 rounded-full bg-green-400 inline-block" />
         <span className="ml-2 text-xs text-slate-500 font-medium">📧 Email Client</span>
+        <div className="absolute top-1.5 right-2">
+          <SpeakButton text={`Email Subject: ${email.subject}. From: ${email.from}. Message: ${email.body.join(' ')}`} />
+        </div>
       </div>
 
       {/* Metadata */}
@@ -325,7 +329,10 @@ export default function QuizPhishing() {
 
           {/* Question */}
           <div className="card p-5 mb-4">
-            <p className="text-lg font-black text-slate-900 mb-4">🎯 {q.question}</p>
+            <div className="flex items-start justify-between gap-4 mb-4">
+              <p className="text-lg font-black text-slate-900 flex-1">🎯 {q.question}</p>
+              <SpeakButton text={q.question} />
+            </div>
             <div className="flex flex-col gap-3">
               {q.options.map((opt, idx) => {
                 let style =
@@ -392,11 +399,14 @@ export default function QuizPhishing() {
 
           {/* Feedback */}
           {selected !== null && (
-            <div className={`card p-5 mb-5 pop-in border-2 ${
+            <div className={`card p-5 mb-5 pop-in border-2 relative pr-16 ${
               q.options[selected].correct
                 ? 'bg-green-50 border-green-300'
                 : 'bg-amber-50 border-amber-300'
             }`}>
+              <div className="absolute top-4 right-4">
+                <SpeakButton text={`${q.options[selected].correct ? t('correct_msg') : t('incorrect_msg')}. ${q.feedback.lines.join(' ')}`} />
+              </div>
               <p className={`font-black text-lg mb-2 ${
                 q.options[selected].correct ? 'text-green-800' : 'text-amber-800'
               }`}>

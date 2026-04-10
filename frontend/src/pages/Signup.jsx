@@ -4,6 +4,7 @@ import axios from 'axios';
 import { User, Phone, Mail, Lock, Eye, EyeOff, Globe, ArrowRight, ArrowLeft, HelpCircle, CheckCircle } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import LanguageSelector from '../components/LanguageSelector';
+import SpeakButton from '../components/SpeakButton';
 import { ReactTransliterate } from 'react-transliterate';
 import 'react-transliterate/dist/index.css';
 
@@ -89,7 +90,12 @@ export default function Signup() {
           placeholder="e.g. Ramesh Kumar"
           containerClassName="w-full flex block"
         />
-        {errors.userName && <p id="name-err" className="mt-2 text-red-700 font-semibold">⚠️ {errors.userName}</p>}
+        {errors.userName && (
+          <div className="flex items-center justify-between gap-2 mt-2 bg-red-50 p-2 rounded-xl border border-red-200">
+            <p id="name-err" className="text-red-700 font-semibold">⚠️ {errors.userName}</p>
+            <SpeakButton text={errors.userName} />
+          </div>
+        )}
       </div>
     </div>,
 
@@ -107,7 +113,12 @@ export default function Signup() {
           onChange={e => setField('mobileNumber', e.target.value)}
           className={`input-field ${errors.mobileNumber ? 'border-red-400' : ''}`}
           placeholder="10-digit number" />
-        {errors.mobileNumber && <p className="mt-2 text-red-700 font-semibold">⚠️ {errors.mobileNumber}</p>}
+        {errors.mobileNumber && (
+          <div className="flex items-center justify-between gap-2 mt-2 bg-red-50 p-2 rounded-xl border border-red-200">
+            <p className="text-red-700 font-semibold">⚠️ {errors.mobileNumber}</p>
+            <SpeakButton text={errors.mobileNumber} />
+          </div>
+        )}
       </div>
       <div>
         <label htmlFor="email" className="input-label">
@@ -119,7 +130,12 @@ export default function Signup() {
           onChange={e => setField('email', e.target.value)}
           className={`input-field ${errors.email ? 'border-red-400' : ''}`}
           placeholder="yourname@example.com" />
-        {errors.email && <p className="mt-2 text-red-700 font-semibold">⚠️ {errors.email}</p>}
+        {errors.email && (
+          <div className="flex items-center justify-between gap-2 mt-2 bg-red-50 p-2 rounded-xl border border-red-200">
+            <p className="text-red-700 font-semibold">⚠️ {errors.email}</p>
+            <SpeakButton text={errors.email} />
+          </div>
+        )}
       </div>
     </div>,
 
@@ -144,7 +160,12 @@ export default function Signup() {
             {showPass ? <EyeOff className="w-6 h-6" /> : <Eye className="w-6 h-6" />}
           </button>
         </div>
-        {errors.password && <p className="mt-2 text-red-700 font-semibold">⚠️ {errors.password}</p>}
+        {errors.password && (
+          <div className="flex items-center justify-between gap-2 mt-2 bg-red-50 p-2 rounded-xl border border-red-200">
+            <p className="text-red-700 font-semibold">⚠️ {errors.password}</p>
+            <SpeakButton text={errors.password} />
+          </div>
+        )}
       </div>
       <div>
         <label htmlFor="confirmPass" className="input-label"><Lock className="inline w-5 h-5 mr-2 text-blue-700" /> {t('confirm_pass')}</label>
@@ -153,7 +174,12 @@ export default function Signup() {
           onChange={e => setField('confirmPassword', e.target.value)}
           className={`input-field ${errors.confirmPassword ? 'border-red-400' : (form.confirmPassword && form.password === form.confirmPassword ? 'border-green-500' : '')}`}
           placeholder={t('confirm_pass_placeholder')} />
-        {errors.confirmPassword && <p className="mt-2 text-red-700 font-semibold">⚠️ {errors.confirmPassword}</p>}
+        {errors.confirmPassword && (
+          <div className="flex items-center justify-between gap-2 mt-2 bg-red-50 p-2 rounded-xl border border-red-200">
+            <p className="text-red-700 font-semibold">⚠️ {errors.confirmPassword}</p>
+            <SpeakButton text={errors.confirmPassword} />
+          </div>
+        )}
         {form.confirmPassword && form.password === form.confirmPassword && (
           <p className="mt-2 text-green-700 font-bold flex items-center gap-1"><CheckCircle className="w-4 h-4" /> {t('pass_match_msg')}</p>
         )}
@@ -200,9 +226,12 @@ export default function Signup() {
       </div>
 
       {/* Brand */}
-      <div className="text-center mb-6">
-        <h1 className="text-3xl font-black text-blue-900">{t('signup_title')}</h1>
+      <div className="text-center mb-6 relative w-full max-w-md">
+        <h1 className="text-3xl font-black text-blue-900 pr-8">{t('signup_title')}</h1>
         <p className="text-lg text-slate-600 mt-1">{t('signup_subtitle')}</p>
+        <div className="absolute top-0 right-4">
+          <SpeakButton text={`${t('signup_title')}. ${t('signup_subtitle')}`} />
+        </div>
       </div>
 
       {/* Progress */}
@@ -219,9 +248,12 @@ export default function Signup() {
       <div className="card w-full max-w-md p-8">
 
         {apiError && (
-          <div role="alert" className="flex items-start gap-3 bg-red-50 border-2 border-red-300 rounded-2xl p-4 mb-6">
+          <div role="alert" className="flex items-start gap-3 bg-red-50 border-2 border-red-300 rounded-2xl p-4 mb-6 relative">
+            <div className="absolute top-2 right-2">
+              <SpeakButton text={`Something went wrong: ${apiError}`} />
+            </div>
             <span className="text-2xl mt-0.5" aria-hidden="true">⚠️</span>
-            <div>
+            <div className="pr-10">
               <p className="font-bold text-red-800 text-lg">Something went wrong</p>
               <p className="text-red-700 text-base mt-1">{apiError}</p>
             </div>
